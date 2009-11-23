@@ -24,7 +24,9 @@ function __autoload($classname) {
  */
 class Autoloader{
   /**
-   * Directories to read over
+   * Directories to read over - app using plugins can register alternative locations for this
+   * for example:
+   *   SITE_DIR/plugins/
    */
   public static $listings = array(FRAMEWORK_DIR);
   /**
