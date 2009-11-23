@@ -152,11 +152,9 @@ class Autoloader{
   }
   
   public static function go(){
-    $test = new CoreApplication();
+    $run = new CoreApplication();
   }
   
 }
 
-
-Autoloader::init();
 ?>
