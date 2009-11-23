@@ -2,7 +2,7 @@
 /**
  * Skel file that doesn't do much, just calls other things
  */
-class Application{
+class CoreApplication{
   
   public function __construct($init=true){
     if($init) $this->exec();
@@ -20,11 +20,6 @@ class Application{
   }
   public function post_exec(){}
   
-  /**
-   * Does nothing, as this class doesn't need
-   * anything in order to work
-   */
-  protected function require(){}
 }
 
 ?>
