@@ -81,6 +81,7 @@ class Autoloader{
     self::$loaded['Autoloader'] = FRAMEWORK_DIR.'Autoloader.php';
     self::register_inis();
     self::pre_init_hooks();
+    self::register_classes();
   }
   /**
    * scan over the directories and look for ini.php files 
