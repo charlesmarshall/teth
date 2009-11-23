@@ -2,7 +2,7 @@
 /**
  * Skel file that doesn't do much, just calls other things
  */
-class Application implements RequirementEngine{
+class Application{
   
   public function __construct($init=true){
     if($init) $this->exec();
