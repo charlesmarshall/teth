@@ -45,6 +45,8 @@ class Autoloader{
    *    - functions
    */
   public static $pre_functions = array();
+  
+  public static $loaded = array();
   /**
    * Add the hook to the array; these functions will be called 
    * 
