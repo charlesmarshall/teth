@@ -96,6 +96,35 @@ class Autoloader{
     }    
   }
   /**
+   * Recursively find all files and load them in to an array, if 
+   */
+  public static function register_classes(){
+    //load in the interator
+    if(!self::$loaded['ModifiedRecursiveDirectoryIterator']){
+      self::$loaded['ModifiedRecursiveDirectoryIterator'] = FRAMEWORK_DIR."ModifiedRecursiveDirectoryIterator.php";
+      include self::$loaded['ModifiedRecursiveDirectoryIterator'];
+    }
+    //include all the classes found within the self::$listing folders
+    $scan = self::$listings;
+    foreach($scan as $dir){
+      //recursive loop
+      $recurse = new RecursiveIteratorIterator(new ModifiedRecursiveDirectoryIterator($dir), true);
+      /**
+       * Loop over all the files in the directory..  
+       * - include them if its a php file, not an ini file & has not been loaded already
+       */
+      foreach($recurse as $file){
+        $basename = basename($file);
+        $classname = str_replace(".php","",$basename);
+        if(strstr($file, ".php") && !self::$loaded[$classname] && $basename != self::$ini_file){
+          include $file;          
+          self::$loaded[$classname] = $file;
+        }
+      }
+    }
+    
+  }
+  /**
    * Add components to be registered in the here
    */
   public static function add_component($component_name, $dir=false){
