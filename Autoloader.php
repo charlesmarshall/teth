@@ -147,6 +147,7 @@ class Autoloader{
     }elseif(!self::$classes[$classname]){
       include FRAMEWORK_DIR . "core/exceptions/MissingClassException.php";
       throw new MissingClassException("CLASS NOT FOUND - $classname");
+      exit;
     }
   }
   
