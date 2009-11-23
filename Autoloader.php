@@ -5,7 +5,6 @@
  * Base level is simply the Application class, which will have skel function that do nothing
  * 
  */
- 
 /**
  * DEFINE CONSTANTS
  */
@@ -15,7 +14,7 @@ if(!defined("FRAMEWORK_DIR")) define("FRAMEWORK_DIR", dirname(__FILE__)."/");
  * Main auto load call
  */
 function __autoload($classname) {
-  //Autoloader::load($classname);
+  Autoloader::load($classname);
 }
 
 /**
@@ -46,6 +45,7 @@ class Autoloader{
    */
   public static $pre_functions = array();
   
+  public static $classes = array();
   public static $loaded = array();
   /**
    * Add the hook to the array; these functions will be called 
@@ -113,15 +113,12 @@ class Autoloader{
       $recurse = new RecursiveIteratorIterator(new ModifiedRecursiveDirectoryIterator($dir), true);
       /**
        * Loop over all the files in the directory..  
-       * - include them if its a php file, not an ini file & has not been loaded already
+       * - include them if its a php file, not an ini file & has not been loaded to classes array already
        */
       foreach($recurse as $file){
         $basename = basename($file);
         $classname = str_replace(".php","",$basename);
-        if(strstr($file, ".php") && !self::$loaded[$classname] && $basename != self::$ini_file){
-          include $file;          
-          self::$loaded[$classname] = $file;
-        }
+        if(strstr($file, ".php") && !self::$classes[$classname] && $basename != self::$ini_file) self::$classes[$classname] = $file->getPathName();
       }
     }
     
@@ -139,9 +136,22 @@ class Autoloader{
   public static function remove_component($component_name){
     unset(self::$components[$component_name]);
   }
+  /**
+   * Load classes in 
+   * - use a loaded array to avoid overhead of include_once
+   */
+  public static function load($classname){
+    if(!self::$loaded[$classname] && self::$classes[$classname]){
+      self::$loaded[$classname] = self::$classes[$classname];
+      include self::$classes[$classname];
+    }elseif(!self::$classes[$classname]){
+      include FRAMEWORK_DIR . "core/exceptions/MissingClassException.php";
+      throw new MissingClassException("CLASS NOT FOUND - $classname");
+    }
+  }
   
   public static function go(){
-    
+    $test = new CoreApplication();
   }
   
 }
