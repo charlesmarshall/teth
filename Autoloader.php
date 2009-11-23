@@ -32,6 +32,7 @@ class Autoloader{
    * Ini file that will be read in
    */
   public static $ini_file="ini.php";
+  public static $application="CoreApplication";
   /**
    * array containing all top level modules
    */
@@ -98,7 +99,7 @@ class Autoloader{
     }    
   }
   /**
-   * Recursively find all files and load them in to an array, if 
+   * Recursively find all files and load them in to an array
    */
   public static function register_classes(){
     //load in the interator
@@ -152,7 +153,7 @@ class Autoloader{
   }
   
   public static function go(){
-    $run = new CoreApplication();
+    $run = new self::$application();
   }
   
 }
