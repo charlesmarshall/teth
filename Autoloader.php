@@ -87,7 +87,7 @@ class Autoloader{
    * scan over the directories and look for ini.php files 
    */
   public static function register_inis(){
-    $scan = self::$listings;
+    $scan = array_reverse(self::$listings); //so newer added directories have priority
     foreach($scan as $dir){
       $listing = scandir($dir);
       foreach($listing as $item){
@@ -107,7 +107,7 @@ class Autoloader{
       include self::$loaded['ModifiedRecursiveDirectoryIterator'];
     }
     //include all the classes found within the self::$listing folders
-    $scan = self::$listings;
+    $scan = array_reverse(self::$listings);
     foreach($scan as $dir){
       //recursive loop
       $recurse = new RecursiveIteratorIterator(new ModifiedRecursiveDirectoryIterator($dir), true);
