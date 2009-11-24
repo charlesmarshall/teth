@@ -12,12 +12,14 @@ class CoreApplication{
   public function setup(){
     $this->environment();    
   }  
+  //ideal place to connect to db
   public function pre_exec(){}
   public function exec(){
     $this->pre_exec();
     $this->setup();    
     $this->post_exec();
   }
+  //save to cache?
   public function post_exec(){}
   
 }
