@@ -1,10 +1,13 @@
 <?
 /**
  * Plugin based framework
- *
- * Base level is simply the Application class, which will have skel function that do nothing
+ *  Typical 
+ * 
  * 
  */
+
+
+
 /**
  * MAIN PHP TETH_CONFIG VAR
  */
@@ -135,6 +138,7 @@ class Autoloader{
   }
   /**
    * scan over the directories and look for ini.php files 
+   * 
    */
   public static function register_inis(){
     $iterator_class = self::class_for('ini_directory_iterator');
@@ -179,8 +183,7 @@ class Autoloader{
         $classname = str_replace(".php","",$basename);
         if(strstr($file, ".php") && !self::$classes[$classname] && $basename != self::$ini_file) self::$classes[$classname] = $file->getPathName();
       }
-    }
-    
+    }    
   }
   /**
    * Add components to be registered in the here
