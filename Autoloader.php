@@ -26,7 +26,7 @@ $TETH_CONFIG = array(
   'recursive_directory_iterator'  => array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators'),
   'ini_directory_iterator'        => array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators'),  
   'missing_class_exception'       => array('class'=>'MissingClassException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR),
-  'application_config_file'       => array('class'=>'config', 'component'=>'config', 'module'=>false, 'base'=>CONFIG_DIR)
+  'application_config_file'       => array('class'=>'config', 'component'=>'config', 'module'=>false, 'base'=>APP_DIR)
   );
 /**
  * Main auto load call
@@ -212,10 +212,10 @@ class Autoloader{
   public static function load($classname){
     if(!self::$loaded[$classname] && self::$classes[$classname]){
       self::$loaded[$classname] = self::$classes[$classname];
-      include self::$classes[$classname];
+      if(is_readable(self::$classes[$classname])) include self::$classes[$classname];
     }else if($config_key = self::class_in_config($classname)){
       self::$loaded[$classname] = self::$classes[$classname] = self::path_to($config_key);
-      include self::path_to($config_key);
+      if(is_readable(self::$classes[$classname])) include self::$classes[$classname];
     }else if(!self::$classes[$classname]){
       $exception_class = self::class_for('missing_class_exception');
       $exception_path = self::path_to('missing_class_exception');
@@ -224,12 +224,16 @@ class Autoloader{
       exit;
     }
   }
-  
+  /**
+   * Load the controller class if it hasn't been 
+   * 
+   */
   public static function go(){
-    if(!self::$classes['controller']) include self::path_to('controller');
-    $classname = self::class_for('controller');
-    print_r($classname);exit;
-    $run = new $classname();
+    $controller = self::class_for('controller');
+    $config = self::class_for('application_config_file');
+    if(!self::$loaded[$controller]) Autoloader::load($controller);
+    if(!self::$loaded[$config]) Autoloader::load($config);
+    $run = new $controller();
   }
   
 }
