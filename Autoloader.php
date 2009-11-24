@@ -23,6 +23,7 @@ global $TETH_CONFIG;
 $TETH_CONFIG = array(
   'autoloader'                    => array('class'=>'Autoloader'),
   'controller'                    => array('class'=>'CoreApplication', 'component'=>'core', 'module'=>'controllers'),  
+  'router'                        => array('class'=>'CoreRouter', 'component'=>'core', 'module'=>'routers'),
   'recursive_directory_iterator'  => array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators'),
   'ini_directory_iterator'        => array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators'),  
   'missing_class_exception'       => array('class'=>'MissingClassException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR),
