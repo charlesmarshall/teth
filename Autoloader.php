@@ -227,14 +227,18 @@ class Autoloader{
   }
   /**
    * Load the controller class if it hasn't been 
-   * 
+   * Load the config file
    */
   public static function go(){
     $controller = self::class_for('controller');
-    $config = self::class_for('application_config_file');
     if(!self::$loaded[$controller]) Autoloader::load($controller);
-    if(!self::$loaded[$config]) Autoloader::load($config);
-    $run = new $controller();
+    if(defined('SITE_NAME')){
+      $config = self::class_for('application_config_file');
+      if(!self::$loaded[$config]) Autoloader::load($config);
+      Autoloader::add_component(SITE_NAME, SITE_DIR);  
+      Autoloader::register_classes(array(SITE_DIR));
+    }
+    $run = new $controller(true);
   }
   
 }
