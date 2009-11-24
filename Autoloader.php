@@ -162,11 +162,9 @@ class Autoloader{
    * Recursively find all files and load them in to an array
    */
   public static function register_classes(){
+    $iterator_class = self::class_for('recursive_directory_iterator');
     //load in the interator
-    if(!self::$loaded['ModifiedRecursiveDirectoryIterator']){
-      self::$loaded['ModifiedRecursiveDirectoryIterator'] = FRAMEWORK_DIR."ModifiedRecursiveDirectoryIterator.php";
-      include self::$loaded['ModifiedRecursiveDirectoryIterator'];
-    }
+    if(!self::$loaded[$iterator_class]) self::load($iterator_class);
     //include all the classes found within the self::$listing folders
     $scan = array_reverse(self::$listings);
     foreach($scan as $dir){
