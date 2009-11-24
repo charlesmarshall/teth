@@ -166,7 +166,7 @@ class Autoloader{
     //load in the interator
     if(!self::$loaded[$iterator_class]) self::load($iterator_class);
     //include all the classes found within the self::$listing folders
-    $scan = array_reverse(self::$listings);
+    $scan = array_reverse(self::$components);
     foreach($scan as $dir){
       //recursive loop
       $recurse = new RecursiveIteratorIterator(new ModifiedRecursiveDirectoryIterator($dir), true);
