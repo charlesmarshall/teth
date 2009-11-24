@@ -216,7 +216,9 @@ class Autoloader{
   }
   
   public static function go(){
-    $run = new self::$application();
+    if(!self::$classes['controller']) include self::path_to('controller');
+    $classname = self::class_for('controller');
+    $run = new $classname();
   }
   
 }
