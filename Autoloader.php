@@ -186,10 +186,10 @@ class Autoloader{
        * Loop over all the files in the directory..  
        * - include them if its a php file, not an ini file & has not been loaded to classes array already
        */
-      foreach($recurse as $file){
+      foreach($recurse as $file){        
         $basename = basename($file);
         $classname = str_replace(".php","",$basename);
-        if(strstr($file, ".php") && !self::$classes[$classname] && $basename != self::$ini_file) self::$classes[$classname] = $file->getPathName();
+        if(strstr($file, ".php") && !self::$classes[$classname] && $basename != self::$ini_file && !in_array($basename, self::$excluded) ) self::$classes[$classname] = $file->getPathName();
       }
     }    
   }
