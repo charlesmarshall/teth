@@ -70,6 +70,13 @@ class Autoloader{
     $path.= $TETH_CONFIG[$type]['class'].".php";
     return $path;
   }
+  /**
+   * return name of the class to use for the type requested
+   */
+  public static function class_for($type){
+    global $TETH_CONFIG;
+    return $TETH_CONFIG[$type]['class'];
+  }
    */
   public static function add_pre_hook($class, $function,$path=false){
     if(!$path) $path = FRAMEWORK_DIR.$class.".php";
