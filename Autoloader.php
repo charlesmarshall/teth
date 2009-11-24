@@ -85,6 +85,16 @@ class Autoloader{
     $TETH_CONFIG[$type] = array('class'=>$class, 'component'=>$component, 'module'=>$module);
     if($base) $TETH_CONFIG[$type]['base']=rtrim($base,"/")."/";
   }
+  /**
+   * Look for the class name in the config var, return the key if found
+   */
+  public static function class_in_config($classname){
+    global $TETH_CONFIG;
+    foreach($TETH_CONFIG as $key=>$type){
+      if($type['class'] == $classname) return $key;
+    }
+    return false;
+  }
    */
   public static function add_pre_hook($class, $function,$path=false){
     if(!$path) $path = FRAMEWORK_DIR.$class.".php";
