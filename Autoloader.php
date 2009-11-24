@@ -137,15 +137,26 @@ class Autoloader{
    * scan over the directories and look for ini.php files 
    */
   public static function register_inis(){
+    $iterator_class = self::class_for('ini_directory_iterator');
+    if(!self::$loaded[$iterator_class]) self::load($iterator_class);
+            
     $scan = array_reverse(self::$listings); //so newer added directories have priority
     foreach($scan as $dir){
-      $listing = scandir($dir);
-      foreach($listing as $item){
-        $item = FRAMEWORK_DIR.$item;
-        $ini = $item."/".self::$ini_file;
-        if(is_dir($item) && is_readable($ini) ) include $ini;
+      //iterator
+      $recurse = new RecursiveIteratorIterator(new $iterator_class($dir), true);
+      //loop over it
+      foreach($recurse as $item){
+        $path = $item->getPathName();
+        $name = $item->getFileName();
+        if($name == "ini.php" && is_readable($path) ){
+          $dirname = dirname($path);
+          include $path;
+          $compname = substr($dirname, strrpos($dirname, "/")+1);          
+          if(!self::$components[$compname]) self::add_component($compname, str_replace("/".$compname, "", $dirname));          
+        }
       }
-    }    
+    } 
+    
   }
   /**
    * Recursively find all files and load them in to an array
