@@ -33,7 +33,7 @@ class Autoloader{
   /**
    * Directories to read over - app using plugins can register alternative locations for this
    * for example:
-   *   SITE_DIR/plugins/
+   *   SITE_DIR/plugins/ to find all extra plugins
    */
   public static $listings = array(FRAMEWORK_DIR);
   /**
