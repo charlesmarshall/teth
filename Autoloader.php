@@ -1,9 +1,16 @@
 <?
 /**
  * Plugin based framework
- *  Typical 
- * 
- * 
+ *  Typical site
+ *    - app
+ *      - config
+ *      - controller
+ *    - plugins
+ *      - plugin_folder
+ *    - public
+ *      - stylesheets
+ *      - javascript
+ *    - tmp
  */
 
 
@@ -221,6 +228,7 @@ class Autoloader{
   public static function go(){
     if(!self::$classes['controller']) include self::path_to('controller');
     $classname = self::class_for('controller');
+    print_r($classname);exit;
     $run = new $classname();
   }
   
