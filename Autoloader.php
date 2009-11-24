@@ -169,7 +169,7 @@ class Autoloader{
     $scan = array_reverse(self::$components);
     foreach($scan as $dir){
       //recursive loop
-      $recurse = new RecursiveIteratorIterator(new ModifiedRecursiveDirectoryIterator($dir), true);
+      $recurse = new RecursiveIteratorIterator(new $iterator_class($dir), true);
       /**
        * Loop over all the files in the directory..  
        * - include them if its a php file, not an ini file & has not been loaded to classes array already
