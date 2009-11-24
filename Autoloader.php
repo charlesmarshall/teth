@@ -103,7 +103,9 @@ class Autoloader{
     else $path=FRAMEWORK_DIR.$path;
     self::$pre_functions[$path][$class][]=$function;
   }
-  
+  /**
+   * Remove a hook from the array
+   */
   public static function remove_pre_hook($class, $path=false){
     if(!$path) $path = FRAMEWORK_DIR.$class.".php";
     else $path=FRAMEWORK_DIR.$path;
