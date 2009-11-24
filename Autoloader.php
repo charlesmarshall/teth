@@ -40,7 +40,6 @@ class Autoloader{
    * Ini file that will be read in
    */
   public static $ini_file="ini.php";
-  public static $application="CoreApplication";
   /**
    * array containing all top level modules
    */
