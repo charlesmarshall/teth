@@ -95,6 +95,8 @@ class Autoloader{
     }
     return false;
   }
+  /**
+   * Add the hook to the array; these functions will be called
    */
   public static function add_pre_hook($class, $function,$path=false){
     if(!$path) $path = FRAMEWORK_DIR.$class.".php";
