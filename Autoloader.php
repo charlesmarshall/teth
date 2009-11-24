@@ -57,8 +57,19 @@ class Autoloader{
   public static $classes = array();
   public static $loaded = array();
   /**
-   * Add the hook to the array; these functions will be called 
-   * 
+   * Handlers to look after path creation from values in the TETH_CONFIG array
+   */
+  /**
+   * Work out the correct file path to use from the config file
+   */
+  public static function path_to($type){
+    global $TETH_CONFIG;
+    if(!$path = $TETH_CONFIG[$type]['base']) $path = FRAMEWORK_DIR;
+    if($TETH_CONFIG[$type]['component']) $path .= $TETH_CONFIG[$type]['component']."/";
+    if($TETH_CONFIG[$type]['module']) $path .= $TETH_CONFIG[$type]['module']."/";
+    $path.= $TETH_CONFIG[$type]['class'].".php";
+    return $path;
+  }
    */
   public static function add_pre_hook($class, $function,$path=false){
     if(!$path) $path = FRAMEWORK_DIR.$class.".php";
