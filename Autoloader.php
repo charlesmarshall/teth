@@ -111,6 +111,9 @@ class Autoloader{
   }
   /**
    * Run over the pre init hooks - cache would a good one 
+   * 
+   * Mainly written so when including a cache component you can bypass loading of most of framework; this point you have only 
+   * read in ini files
    */
   public static function pre_init_hooks(){
     foreach(self::$pre_functions as $path=>$classes){
