@@ -100,7 +100,6 @@ class Autoloader{
    */
   public static function add_pre_hook($class, $function,$path=false){
     if(!$path) $path = FRAMEWORK_DIR.$class.".php";
-    else $path=FRAMEWORK_DIR.$path;
     self::$pre_functions[$path][$class][]=$function;
   }
   /**
@@ -108,8 +107,7 @@ class Autoloader{
    */
   public static function remove_pre_hook($class, $path=false){
     if(!$path) $path = FRAMEWORK_DIR.$class.".php";
-    else $path=FRAMEWORK_DIR.$path;
-    unset(self::$pre_functions[$path][$class]);
+    if(is_array(self::$pre_functions[$path]) && self::$pre_functions[$path][$class]) unset(self::$pre_functions[$path][$class]);
   }
   /**
    * Run over the pre init hooks - cache would a good one 
