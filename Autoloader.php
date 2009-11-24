@@ -77,6 +77,14 @@ class Autoloader{
     global $TETH_CONFIG;
     return $TETH_CONFIG[$type]['class'];
   }
+  /**
+   * Update the values in the config array to the new params passed in
+   */
+  public static function set_config($type, $class, $component=false, $module=false, $base=false){
+    global $TETH_CONFIG;
+    $TETH_CONFIG[$type] = array('class'=>$class, 'component'=>$component, 'module'=>$module);
+    if($base) $TETH_CONFIG[$type]['base']=rtrim($base,"/")."/";
+  }
    */
   public static function add_pre_hook($class, $function,$path=false){
     if(!$path) $path = FRAMEWORK_DIR.$class.".php";
