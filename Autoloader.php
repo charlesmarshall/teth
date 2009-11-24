@@ -8,7 +8,6 @@
 /**
  * DEFINE CONSTANTS
  */
-if(!defined("FRAMEWORK_DIR")) define("FRAMEWORK_DIR", dirname(__FILE__)."/");
 
 /**
  * Main auto load call
