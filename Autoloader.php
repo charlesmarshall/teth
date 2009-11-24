@@ -128,7 +128,7 @@ class Autoloader{
    * main function that reads a bunch of stuff in
    */
   public static function init(){
-    self::$loaded['Autoloader'] = FRAMEWORK_DIR.'Autoloader.php';
+    self::$loaded['Autoloader'] = self::path_to('autoloader');
     self::register_inis();
     self::pre_init_hooks();
     self::register_classes();
