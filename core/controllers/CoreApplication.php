@@ -2,7 +2,7 @@
 /**
  * Skel file that doesn't do much, just calls other things
  */
-class CoreApplication{
+class CoreApplication implements ApplicationInterface{
   /**
    * Default the env to development
    */
@@ -20,8 +20,6 @@ class CoreApplication{
     $dns = dns_get_record(gethostbyaddr($hostname));
     if(count($dns)) $this->environment = "production";
     if(!defined('ENV')) define('ENV', $this->environment);
-
-    exit;
   }
   //load file based on the current environment
   public function setup(){}  
