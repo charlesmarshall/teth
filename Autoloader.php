@@ -50,6 +50,7 @@ class Autoloader{
    *  -path to file
    *   - class
    *    - functions
+   * These function should load in their own dependancies - to avoid auto loader issues
    */
   public static $pre_functions = array();
   
