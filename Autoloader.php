@@ -66,6 +66,7 @@ class Autoloader{
   
   public static $classes = array();
   public static $loaded = array();
+  public static $excluded = array('index.php','config.php','production.php', 'development.php', 'environment.php');
   /**
    * Handlers to look after path creation from values in the TETH_CONFIG array
    */
