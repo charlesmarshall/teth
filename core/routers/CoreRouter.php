@@ -36,10 +36,8 @@ class CoreRouter implements RouterInterface{
 
     $controller_position = $position_map['controller'];
     $action_position = $position_map['action'];
-
     if(!$controller = $this->controller($this->split[$controller_position]) ){
       $controller = $map['controller'];
-      $map['action'] = $this->split[$controller_position];
       $position_map = $this->shift($position_map, $controller_position);
       unset($position_map['controller']);
     }
