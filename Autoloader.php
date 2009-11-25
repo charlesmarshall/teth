@@ -227,7 +227,15 @@ class Autoloader{
     }
   }
   /**
-   * Load the controller class if it hasn't been 
+   * Find all the controller files that are in the classes array
+   */
+  public static function fetch_controllers(){
+    $found = array();
+    foreach(self::$classes as $class=>$path) if(strstr($path, CONTROLLER_DIR)) $found[$class] = $path;
+    return $found;
+  }
+  /**
+   * Load the application class if it hasn't been 
    * Load the config file
    */
   public static function go(){
