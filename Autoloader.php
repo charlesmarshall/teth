@@ -244,8 +244,8 @@ class Autoloader{
     if(defined('SITE_NAME')){
       $config = self::class_for('application_config_file');
       if(!self::$loaded[$config]) Autoloader::load($config);
-      Autoloader::add_component(SITE_NAME, SITE_DIR);  
-      Autoloader::register_classes(array(SITE_DIR));
+      self::add_component(SITE_NAME, SITE_DIR);  
+      self::register_classes(array(SITE_DIR));
     }
     $run = new $controller(true);
   }
