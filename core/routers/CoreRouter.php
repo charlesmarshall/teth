@@ -31,21 +31,24 @@ class CoreRouter implements RouterInterface{
   public function map(){
     $map = $this->mapped;
     $position_map = $this->position_map;
-
+    //trim down the url to remove empty array records
     $path = ltrim($this->requested_url, $this->separator);
     if(strlen($path)) $this->split = explode($this->separator, $path);
-
+    
     $controller_position = $position_map['controller'];
     $action_position = $position_map['action'];
+    /**
+     * find the controller - if its not found then use the shift function to re order & use the default
+     */
     if(!$controller = $this->controller($this->split[$controller_position]) ){
       $controller = $map['controller'];
       $position_map = $this->shift($position_map, $controller_position);
       unset($position_map['controller']);
     }
     $this->mapped['controller'] = $controller;
-
+    //remove this from the map array so doesnt get looped over - already been worked out above
     unset($map['controller']);
-
+    //go over the remaining map and get their values
     foreach($map as $what=>$value){
       $pos = $position_map[$what];
       $this->mapped[$what] = $this->find($what,$pos);
@@ -55,6 +58,7 @@ class CoreRouter implements RouterInterface{
       throw new PageNotFoundException("Page Not Found");
     else{
       $reflect = new ReflectionMethod($this->mapped['controller'], $this->mapped['action']);
+      //if this isnt a public method then throw an error
       if(!$reflect->isPublic()) throw new PageNotFoundException("Page Not Found");
     }
     return $this->mapped;
