@@ -4,7 +4,7 @@
  *  Typical site
  *    - app
  *      - config
- *      - controller
+ *      - application
  *    - plugins
  *      - plugin_folder
  *    - public
