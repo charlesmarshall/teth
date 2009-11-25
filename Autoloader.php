@@ -20,13 +20,20 @@
 global $TETH_CONFIG;
 
 $TETH_CONFIG = array(
+  
   'autoloader'                    => array('class'=>'Autoloader'),
+  /**
+   * Main classes used by the autoloader to start the application
+   */
   'application'                   => array('class'=>'CoreApplication', 'component'=>'core', 'module'=>'applications'),  
   'router'                        => array('class'=>'CoreRouter', 'component'=>'core', 'module'=>'routers'),
   'recursive_directory_iterator'  => array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators'),
   'ini_directory_iterator'        => array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators'),  
   'missing_class_exception'       => array('class'=>'MissingClassException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR),
-  'application_config_file'       => array('class'=>'config', 'component'=>'config', 'module'=>false, 'base'=>APP_DIR)
+  /**
+   * Application config file
+   */
+  'application_config_file'       => array('class'=>'config', 'component'=>'config', 'module'=>false, 'base'=>APP_DIR),
   );
 /**
  * Main auto load call
