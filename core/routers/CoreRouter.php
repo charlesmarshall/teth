@@ -5,5 +5,10 @@ class CoreRouter implements RouterInterface{
   public $mapped=array('controller'=>'PageController', 'action'=>'index');
   public $separator="/";
   
+  public $controllers=array();
+  public $requested_url=false;
+  public $split=array();
+  public $get=array();
+  public $post=array();
 }
 ?>
