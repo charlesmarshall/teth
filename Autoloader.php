@@ -246,6 +246,7 @@ class Autoloader{
       if(!self::$loaded[$config]) Autoloader::load($config);
       self::add_component(SITE_NAME, SITE_DIR);  
       self::register_classes(array(SITE_DIR));
+      $all_controllers = self::fetch_controllers();
     }
     $run = new $controller(true);
   }
