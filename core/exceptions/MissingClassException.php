@@ -1,15 +1,18 @@
 <?
 class MissingClassException extends Exception{
   
-  public static $error_page = false;
   
   public function __construct($message, $status=500) {
+    global $TETH_CONFIG;
+    $path = $TETH_CONFIG['500_page']['base'] . $TETH_CONFIG['500_page']['class'] . $TETH_CONFIG['500_page']['suffix'];
+    
     header('HTTP/1.1 '.$status.' Application Error',1,$status);
     header('Status '.$status);
     ob_end_clean();
-    if(self::$error_page) echo file_get_contents(self::$error_page);
+    if(is_readable($path)) echo file_get_contents($path);
     else echo $message;
     exit;
   }
+  
 }
 ?>
