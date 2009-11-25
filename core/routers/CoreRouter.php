@@ -18,5 +18,9 @@ class CoreRouter implements RouterInterface{
     $this->post = $post;
   }
   
+  public function find($what, $position){
+    if($this->split[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($this->split[$position]) ) );
+    else $this->mapped[$what];
+  }
 }
 ?>
