@@ -43,6 +43,7 @@ class CoreApplication implements ApplicationInterface{
     $router_class = $this->config['router']['class'];
     $this->router = new $router_class($this->available_controllers, $parsed['path'], $_GET, $_POST);
     $map = $this->router->map();
+    print_r($map);exit;
   }
 
   public function exec(){
