@@ -34,6 +34,12 @@ $TETH_CONFIG = array(
    * Application config file
    */
   'application_config_file'       => array('class'=>'config', 'component'=>'config', 'module'=>false, 'base'=>APP_DIR),
+  /**
+   * Error pages
+   */
+  '500_page'                      => array('class'=>'error','suffix'=>'.html', 'base'=>PUBLIC_DIR),
+  '404_page'                      => array('class'=>'404','suffix'=>'.html', 'base'=>PUBLIC_DIR),
+  'error_page'                    => array('class'=>'error','suffix'=>'.html', 'base'=>PUBLIC_DIR)
   );
 /**
  * Main auto load call
