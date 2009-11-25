@@ -79,7 +79,7 @@ class CoreRouter implements RouterInterface{
 
   public function find($what, $position){
     if($this->split[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($this->split[$position]) ) );
-    else $this->mapped[$what];
+    else return $this->mapped[$what];
   }
 
   public function controller($check){
