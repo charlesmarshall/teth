@@ -7,15 +7,15 @@ class CoreApplication implements ApplicationInterface{
    * Default the env to development
    */
   public $environment = "development";
-  
+
   public $config=array();
-  
+
   public $available_controllers = array();
-  
+
   public $controller = false;
-  
+
   public $router = false;
-  
+
   public function __construct($config=array(), $available_controllers=array(), $init=false){
     $this->config = $config;
     $this->available_controllers = $available_controllers;
@@ -34,31 +34,31 @@ class CoreApplication implements ApplicationInterface{
     }else $this->environment = ENV;
   }
   //load file based on the current environment
-  public function setup(){}  
+  public function setup(){}
   //ideal place to connect to db
   public function pre_exec(){}
-  
+
   public function route(){
     $parsed = parse_url($_SERVER['REQUEST_URI']);
     $router_class = $this->config['router']['class'];
     $this->router = new $router_class($this->available_controllers, $parsed['path'], $_GET, $_POST);
     $map = $this->router->map();
   }
-  
+
   public function exec(){
     $this->pre_exec();
-    
+
     $this->environment();
-    
+
     $this->route();
-    
+
     $this->setup();
-     
+
     $this->post_exec();
   }
   //save to cache?
   public function post_exec(){}
-  
+
 }
 
 ?>
