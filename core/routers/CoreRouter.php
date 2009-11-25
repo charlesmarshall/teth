@@ -18,6 +18,25 @@ class CoreRouter implements RouterInterface{
     $this->post = $post;
   }
   
+  /**
+   * Function designed to remove an item from the position_map
+   * - flips the array
+   * - sort the array by key
+   * - slice the items from infront of position
+   * - slice the items after position
+   * - merge the 2
+   * - flip it back for the new positions of each item in the position_map
+   */
+  public function shift($array, $position){
+    $flip = array_flip($array);
+    ksort($flip);
+    $head = array_slice($flip, 0,$position);    
+    $tail = array_slice($flip, $position+1);
+    $sliced = array_merge($head, $tail);
+    $new = array_flip($sliced);
+    return $new;
+  }
+  
   public function find($what, $position){
     if($this->split[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($this->split[$position]) ) );
     else $this->mapped[$what];
