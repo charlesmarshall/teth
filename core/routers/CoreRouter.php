@@ -22,5 +22,12 @@ class CoreRouter implements RouterInterface{
     if($this->split[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($this->split[$position]) ) );
     else $this->mapped[$what];
   }
+  
+  public function controller($check){
+    $check = str_replace(" ","",ucwords(str_replace("_"," ",str_replace("-", "_",strtolower($check)))))."Controller";
+    if(isset($this->controllers[$check])) return $check;
+    else return false;
+  }
+ 
 }
 ?>
