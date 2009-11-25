@@ -88,10 +88,11 @@ class Autoloader{
    */
   public static function path_to($type){
     global $TETH_CONFIG;
+    if(!$suffix = $TETH_CONFIG[$type]['suffix']) $suffix=".php";
     if(!$path = $TETH_CONFIG[$type]['base']) $path = FRAMEWORK_DIR;
     if($TETH_CONFIG[$type]['component']) $path .= $TETH_CONFIG[$type]['component']."/";
     if($TETH_CONFIG[$type]['module']) $path .= $TETH_CONFIG[$type]['module']."/";
-    $path.= $TETH_CONFIG[$type]['class'].".php";
+    $path.= $TETH_CONFIG[$type]['class'].$suffix;
     return $path;
   }
   /**
