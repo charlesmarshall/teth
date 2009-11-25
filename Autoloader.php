@@ -14,7 +14,6 @@
  */
 
 
-
 /**
  * MAIN PHP TETH_CONFIG VAR
  */
@@ -239,8 +238,10 @@ class Autoloader{
    * Load the config file
    */
   public static function go(){
-    $controller = self::class_for('controller');
-    if(!self::$loaded[$controller]) Autoloader::load($controller);
+    global $TETH_CONFIG;
+    $all_controllers = array();
+    $application = self::class_for('application');
+    if(!self::$loaded[$application]) Autoloader::load($application);    
     if(defined('SITE_NAME')){
       $config = self::class_for('application_config_file');
       if(!self::$loaded[$config]) Autoloader::load($config);
@@ -248,7 +249,7 @@ class Autoloader{
       self::register_classes(array(SITE_DIR));
       $all_controllers = self::fetch_controllers();
     }
-    $run = new $controller(true);
+    $run = new $application($TETH_CONFIG, $all_controllers, true);
   }
   
 }
