@@ -2,9 +2,11 @@
 class CoreRouter implements RouterInterface{
   //the var that handles the mapping
   public $position_map=array('controller'=>0, 'action'=>1, 'uid'=>2, 'language'=>3);
+  //default values
   public $mapped=array('controller'=>'PageController', 'action'=>'index');
+  //what to split the url by
   public $separator="/";
-
+  //storage
   public $controllers=array();
   public $requested_url=false;
   public $split=array();
