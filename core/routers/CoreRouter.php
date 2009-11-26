@@ -63,24 +63,21 @@ class CoreRouter implements RouterInterface{
       //if this isnt a public method then throw an error
       if(!$reflect->isPublic()) throw new PageNotFoundException("Page Not Found");
     }
+
     return $this->mapped;
   }
   /**
    * Function designed to remove an item from the position_map
    * - flips the array
    * - sort the array by key
-   * - slice the items from infront of position
-   * - slice the items after position
-   * - merge the 2
+   * - splice the item at position out of the array
    * - flip it back for the new positions of each item in the position_map
    */
   public function shift($array, $position){
     $flip = array_flip($array);
     ksort($flip);
-    $head = array_slice($flip, 0,$position);
-    $tail = array_slice($flip, $position+1);
-    $sliced = array_merge($head, $tail);
-    $new = array_flip($sliced);
+    array_splice($flip, $position,1);
+    $new = array_flip($flip);
     return $new;
   }
 
