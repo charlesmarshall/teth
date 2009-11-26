@@ -25,8 +25,7 @@ class CoreApplication implements ApplicationInterface{
     if(!defined('ENV')){
       $hostname = gethostbyname($_SERVER["HOSTNAME"]);
       if(!strlen($hostname)) $hostname = gethostbyname($_SERVER["SERVER_NAME"]);
-      $dns = dns_get_record(gethostbyaddr($hostname));
-      if(count($dns)) $this->environment = "production";
+      if($hostname != "127.0.0.1") $this->environment = "production";
       define('ENV', $this->environment);
     }else $this->environment = ENV;
   }
