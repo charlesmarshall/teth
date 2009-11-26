@@ -240,12 +240,12 @@ class Autoloader{
     $application = self::class_for('application');
     if(!self::$loaded[$application]) Autoloader::load($application);    
     if(defined('SITE_NAME')){
-      $config = Config::$settings['config']['application']['file'];
-      if(!self::$loaded[$config]) Autoloader::load($config);
+      include Config::$settings['config']['application']['path'] . Config::$settings['config']['application']['file'] . Config::$settings['config']['application']['suffix'];
       self::add_component(SITE_NAME, SITE_DIR);  
       self::register_classes(array(SITE_DIR));
       $all_controllers = self::fetch_controllers();
     }
+
     $run = new $application($all_controllers, true);
   }
   
