@@ -24,7 +24,7 @@ class Config{
  * List of default classes for main things
  */
 Config::$settings['classes']['autoloader']                    = array('class'=>'Autoloader');
-Config::$settings['classes']['application']                   = array('class'=>'CoreRouter', 'component'=>'core', 'module'=>'routers');
+Config::$settings['classes']['application']                   = array('class'=>'CoreApplication', 'component'=>'core', 'module'=>'applications');
 Config::$settings['classes']['router']                        = array('class'=>'CoreRouter', 'component'=>'core', 'module'=>'routers');
 Config::$settings['classes']['recursive_directory_iterator']  = array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
 Config::$settings['classes']['ini_directory_iterator']        = array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
