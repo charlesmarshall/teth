@@ -38,11 +38,10 @@ class CoreApplication implements ApplicationInterface{
   public function route(){
     $parsed = parse_url($_SERVER['REQUEST_URI']);
     //figure out the routing
-    $router_class = $this->config['router']['class'];
+    $router_class = Config::$settings['classes']['router']['class'];
     $this->router = new $router_class($this->available_controllers, $parsed['path'], $_GET, $_POST);
-    $map = $this->router->map();
-    
-    
+    $map = $this->router->map();    
+    print_r($map);exit;
   }
 
   public function exec(){
