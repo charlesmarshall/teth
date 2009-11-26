@@ -62,7 +62,10 @@ Config::$settings['ini_file'] = "ini.php";
  * These function should load in their own dependancies - to avoid auto loader issues
  */
 Config::$settings['pre_functions'] = array();
-
+/**
+ * ip address for local environments
+ */
+Config::$settings['local_environments'] = array("127.0.0.1");
 
 /**
  * Main auto load call
