@@ -63,7 +63,7 @@ Config::$settings['ini_file'] = "ini.php";
  */
 Config::$settings['pre_functions'] = array();
 /**
- * environment map
+ * ip address for local environments
  */
 Config::$settings['local_environments'] = array("127.0.0.1");
 
