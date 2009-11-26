@@ -8,16 +8,13 @@ class CoreApplication implements ApplicationInterface{
    */
   public $environment = "development";
 
-  public $config=array();
-
   public $available_controllers = array();
 
   public $controller = false;
 
   public $router = false;
 
-  public function __construct($config=array(), $available_controllers=array(), $init=false){
-    $this->config = $config;
+  public function __construct($available_controllers=array(), $init=false){
     $this->available_controllers = $available_controllers;
     if($init) $this->exec();
   }
