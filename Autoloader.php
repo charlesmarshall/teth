@@ -240,7 +240,8 @@ class Autoloader{
     $application = self::class_for('application');
     if(!self::$loaded[$application]) Autoloader::load($application);    
     if(defined('SITE_NAME')){
-      include Config::$settings['config']['application']['path'] . Config::$settings['config']['application']['file'] . Config::$settings['config']['application']['suffix'];
+      $config = Config::$settings['config']['application']['path'] . Config::$settings['config']['application']['file'] . Config::$settings['config']['application']['suffix'];
+      if(is_readable($config)) include_once $config;
       self::add_component(SITE_NAME, SITE_DIR);  
       self::register_classes(array(SITE_DIR));
       $all_controllers = self::fetch_controllers();
