@@ -6,9 +6,9 @@ class CoreController implements ControllerInterface{
   public $action="";
   public $uid="";
   public $format="";
-  
-  public $controller_name="";
+  //folder to look for views
   public $folder="";
+  public $layout="application";
   
   public function __construct($route, $init=true){    
     foreach($route as $key=>$val) $this->$key = $val;
