@@ -66,6 +66,11 @@ Config::$settings['pre_functions'] = array();
  * ip address for local environments
  */
 Config::$settings['local_environments'] = array("127.0.0.1");
+/**
+ * Mapping for urls
+ * - takes this format: array('controller'=>'PageController', 'action'=>'index');
+ */
+Config::$settings['position_map']=false;
 
 /**
  * Main auto load call
