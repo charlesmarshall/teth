@@ -38,7 +38,10 @@ class CoreRouter implements RouterInterface{
     if(strlen($path)) $this->split = explode($this->separator, $path);
     
     $controller_position = $position_map['controller'];
-    $action_position = $position_map['action'];
+    $action_position = $position_map['action'];    
+    //find the formatting
+    $this->mapped['format'] = $this->format($path);
+    
     /**
      * find the controller - if its not found then use the shift function to re order & use the default
      */
@@ -60,9 +63,7 @@ class CoreRouter implements RouterInterface{
       //if this isnt a public method then throw an error
       if(!$reflect->isPublic()) throw new PageNotFoundException("Page Not Found");
     }
-    //find the formatting
-    $this->mapped['format'] = $this->format($path);
-
+    
     return $this->mapped;
   }
   /**
