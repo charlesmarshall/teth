@@ -82,11 +82,14 @@ class CoreRouter implements RouterInterface{
   }
 
   public function find($what, $position){
-    if($this->split[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($this->split[$position]) ) );
+    $check = $this->split[$position];
+    if(strstr($check, $this->mapped['format'])) $check = str_replace($this->mapped['format'], "", $check);
+    if($this->split[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($check) ) );
     else return $this->mapped[$what];
   }
 
   public function controller($check){
+    if(strstr($check, $this->mapped['format'])) $check = str_replace($this->mapped['format'], "", $check);
     $check = str_replace(" ","",ucwords(str_replace("_"," ",str_replace("-", "_",strtolower($check)))))."Controller";
     if(isset($this->controllers[$check])) return $check;
     else return false;
