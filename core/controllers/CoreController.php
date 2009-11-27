@@ -19,6 +19,13 @@ class CoreController implements ControllerInterface{
   
   protected function init(){
     if($this->controller) $this->controller_name = strtolower(str_replace("Controller","",$this->controller));
+  
+  protected function view(){
+    
+  }
+  
+  protected function layout(){
+    
   }
   
   public function execute(){
