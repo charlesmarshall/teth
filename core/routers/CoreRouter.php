@@ -51,10 +51,7 @@ class CoreRouter implements RouterInterface{
     //remove this from the map array so doesnt get looped over - already been worked out above
     unset($map['controller']);
     //go over the remaining map and get their values
-    foreach($map as $what=>$value){
-      $pos = $position_map[$what];
-      $this->mapped[$what] = $this->find($what,$pos);
-    }
+    foreach($map as $what=>$value) $this->mapped[$what] = $this->find($what, $position_map[$what]);
     //if no controller, action or method on that class then die
     if(!$this->mapped['controller'] || !$this->mapped['action'] || !method_exists($this->mapped['controller'], $this->mapped['action']))
       throw new PageNotFoundException("Page Not Found");
