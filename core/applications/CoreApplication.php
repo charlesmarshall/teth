@@ -10,7 +10,9 @@ class CoreApplication implements ApplicationInterface{
 
   public $available_controllers = array();
 
-  public $controller = false;
+  public $routing_map = array();
+  
+  public $controller_model = false;
 
   public $router = false;
 
@@ -39,8 +41,7 @@ class CoreApplication implements ApplicationInterface{
     //figure out the routing
     $router_class = Config::$settings['classes']['router']['class'];
     $this->router = new $router_class($this->available_controllers, $parsed['path'], $_GET, $_POST);
-    $map = $this->router->map();    
-    print_r($map);exit;
+    return $this->router->map();        
   }
 
   public function exec(){
@@ -48,7 +49,7 @@ class CoreApplication implements ApplicationInterface{
 
     $this->environment();
 
-    $this->route();
+    $this->routing_map = $this->route();
 
     $this->setup();
 
