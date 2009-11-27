@@ -46,16 +46,14 @@ class CoreApplication implements ApplicationInterface{
 
   public function exec(){
     $this->pre_exec();
-
     $this->environment();
-
     $this->routing_map = $this->route();
-
     $this->setup();
     
     $model_name = $this->routing_map['controller'];
     $this->controller_model = new $model_name($this->routing_map);
-
+    $this->controller_model->execute();
+    
     $this->post_exec();
   }
   //save to cache?
