@@ -1,9 +1,8 @@
 <?
 class PageNotFoundException extends Exception{
   
-  public function __construct($message, $status=500) {
-    if(Config::$settings['error_pages'][$status]) $conf = Config::$settings['error_pages'][$status];
-    else $conf = Config::$settings['error_pages']['generic'];
+  public function __construct($message, $status=404, $trace=true) {
+    if(!$conf = Config::$settings['error_pages'][$status]) $conf = Config::$settings['error_pages']['generic'];
     $path = $conf['path'].$conf['file'].$conf['suffix'];
     
     header('HTTP/1.1 '.$status.' Page not found',1,$status);
@@ -11,6 +10,7 @@ class PageNotFoundException extends Exception{
     ob_end_clean();
     if(is_readable($path)) echo file_get_contents($path);
     else echo $message;
+    if($trace) echo "<br />".$this->getTraceAsString()."<br />IN:".$this->getFile()."<br />LN:".$this->getLine();
     exit;
   }
 }
