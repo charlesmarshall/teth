@@ -13,12 +13,12 @@ class CoreRouter implements RouterInterface{
   public $get=array();
   public $post=array();
 
-  public function __construct($controllers, $path, $get=array(), $post=array(), $position_map=false){
+  public function __construct($controllers, $path, $get=array(), $post=array()){
     $this->controllers = $controllers;
     $this->requested_url = $path;
     $this->get = $get;
     $this->post = $post;
-    if(is_array($position_map)) $this->position_map = $position_map;
+    if(is_array(Config::$settings['position_map'])) $this->position_map = Config::$settings['position_map'];
   }
   /**
    * Mapping function to determine what controller
