@@ -71,7 +71,10 @@ Config::$settings['local_environments'] = array("127.0.0.1");
  */
 Config::$settings['position_map']=false;
 
-Config::$settings['default_form']=".html";
+Config::$settings['default_format']=".html";
+
+Config::$settings['controller_before_action'] = "before";
+Config::$settings['controller_after_action'] = "after";
 
 /**
  * Main auto load call
