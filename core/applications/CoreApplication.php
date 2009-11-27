@@ -31,7 +31,7 @@ class CoreApplication implements ApplicationInterface{
       define('ENV', $this->environment);
     }else $this->environment = ENV;
   }
-  //load file based on the current environment
+  //extra hook - post routing
   public function setup(){}
   //ideal place to connect to db
   public function pre_exec(){}
@@ -52,6 +52,9 @@ class CoreApplication implements ApplicationInterface{
     $this->routing_map = $this->route();
 
     $this->setup();
+    
+    $model_name = $this->routing_map['controller'];
+    $this->controller_model = new $model_name($this->routing_map);
 
     $this->post_exec();
   }
