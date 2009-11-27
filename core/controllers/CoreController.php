@@ -8,6 +8,7 @@ class CoreController implements ControllerInterface{
   public $format="";
   
   public $controller_name="";
+  public $folder="";
   
   public function __construct($route, $init=true){    
     foreach($route as $key=>$val) $this->$key = $val;
@@ -18,7 +19,10 @@ class CoreController implements ControllerInterface{
   protected function after(){}
   
   protected function init(){
-    if($this->controller) $this->controller_name = strtolower(str_replace("Controller","",$this->controller));
+    if($this->controller){
+      $name = str_replace("Controller","",$this->controller);
+      foreach(split("/[A-Z]/", $name) as $val) $this->folder .= strtolower($val)."/";
+    }
   
   protected function view(){
     
