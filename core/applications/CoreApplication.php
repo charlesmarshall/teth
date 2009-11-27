@@ -8,16 +8,13 @@ class CoreApplication implements ApplicationInterface{
    */
   public $environment = "development";
 
-  public $config=array();
-
   public $available_controllers = array();
 
   public $controller = false;
 
   public $router = false;
 
-  public function __construct($config=array(), $available_controllers=array(), $init=false){
-    $this->config = $config;
+  public function __construct($available_controllers=array(), $init=false){
     $this->available_controllers = $available_controllers;
     if($init) $this->exec();
   }
@@ -28,8 +25,7 @@ class CoreApplication implements ApplicationInterface{
     if(!defined('ENV')){
       $hostname = gethostbyname($_SERVER["HOSTNAME"]);
       if(!strlen($hostname)) $hostname = gethostbyname($_SERVER["SERVER_NAME"]);
-      $dns = dns_get_record(gethostbyaddr($hostname));
-      if(count($dns)) $this->environment = "production";
+      if(!in_array($hostname, Config::$settings['local_environments'])) $this->environment = "production";
       define('ENV', $this->environment);
     }else $this->environment = ENV;
   }
@@ -41,11 +37,10 @@ class CoreApplication implements ApplicationInterface{
   public function route(){
     $parsed = parse_url($_SERVER['REQUEST_URI']);
     //figure out the routing
-    $router_class = $this->config['router']['class'];
+    $router_class = Config::$settings['classes']['router']['class'];
     $this->router = new $router_class($this->available_controllers, $parsed['path'], $_GET, $_POST);
-    $map = $this->router->map();
+    $map = $this->router->map();    
     print_r($map);exit;
-    
   }
 
   public function exec(){

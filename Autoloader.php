@@ -15,32 +15,65 @@
 
 
 /**
- * MAIN PHP TETH_CONFIG VAR
+ * CONFIG CLASS
  */
-global $TETH_CONFIG;
+class Config{
+  public static $settings=array();
+}
+/**
+ * List of default classes for main things
+ */
+Config::$settings['classes']['autoloader']                    = array('class'=>'Autoloader');
+Config::$settings['classes']['application']                   = array('class'=>'CoreApplication', 'component'=>'core', 'module'=>'applications');
+Config::$settings['classes']['router']                        = array('class'=>'CoreRouter', 'component'=>'core', 'module'=>'routers');
+Config::$settings['classes']['recursive_directory_iterator']  = array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
+Config::$settings['classes']['ini_directory_iterator']        = array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
+/**
+ * Exceptions
+ */
+Config::$settings['exceptions']['missing_class']  = array('class'=>'MissingClassException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
+Config::$settings['exceptions']['page_not_found'] = array('class'=>'PageNotFoundException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
+/**
+ * Config files
+ */
+Config::$settings['config']['application'] = array('file'=>'config', 'suffix'=>'.php', 'path'=>CONFIG_DIR);
+/**
+ * Preset error pages
+ */
+Config::$settings['error_pages']['503']     = array('file'=>'503', 'suffix'=>'.html', 'path'=>PUBLIC_DIR);
+Config::$settings['error_pages']['404']     = array('file'=>'404', 'suffix'=>'.html', 'path'=>PUBLIC_DIR);
+Config::$settings['error_pages']['generic'] = array('file'=>'error', 'suffix'=>'.html', 'path'=>PUBLIC_DIR);
+/**
+ * Directories to read over - app using plugins can register alternative locations for this
+ * for example:
+ *   SITE_DIR/plugins/ to find all extra plugins
+ */
+Config::$settings['listings'] = array(FRAMEWORK_DIR);
+/**
+ * name of ini files
+ */
+Config::$settings['ini_file'] = "ini.php";
+/**
+ * static array for pre init hooks, so actions such as cache can be bypass loading
+ * - takes form of:
+ *  -path to file
+ *   - class
+ *    - functions
+ * These function should load in their own dependancies - to avoid auto loader issues
+ */
+Config::$settings['pre_functions'] = array();
+/**
+ * ip address for local environments
+ */
+Config::$settings['local_environments'] = array("127.0.0.1");
+/**
+ * Mapping for urls
+ * - takes this format: array('controller'=>'PageController', 'action'=>'index');
+ */
+Config::$settings['position_map']=false;
 
-$TETH_CONFIG = array(
-  
-  'autoloader'                    => array('class'=>'Autoloader'),
-  /**
-   * Main classes used by the autoloader to start the application
-   */
-  'application'                   => array('class'=>'CoreApplication', 'component'=>'core', 'module'=>'applications'),  
-  'router'                        => array('class'=>'CoreRouter', 'component'=>'core', 'module'=>'routers'),
-  'recursive_directory_iterator'  => array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators'),
-  'ini_directory_iterator'        => array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators'),  
-  'missing_class_exception'       => array('class'=>'MissingClassException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR),
-  /**
-   * Application config file
-   */
-  'application_config_file'       => array('class'=>'config', 'component'=>'config', 'module'=>false, 'base'=>APP_DIR),
-  /**
-   * Error pages
-   */
-  '500_page'                      => array('class'=>'error','suffix'=>'.html', 'base'=>PUBLIC_DIR),
-  '404_page'                      => array('class'=>'404','suffix'=>'.html', 'base'=>PUBLIC_DIR),
-  'error_page'                    => array('class'=>'error','suffix'=>'.html', 'base'=>PUBLIC_DIR)
-  );
+Config::$settings['default_form']="html";
+
 /**
  * Main auto load call
  */
@@ -53,29 +86,11 @@ function __autoload($classname) {
  * 
  */
 class Autoloader{
-  /**
-   * Directories to read over - app using plugins can register alternative locations for this
-   * for example:
-   *   SITE_DIR/plugins/ to find all extra plugins
-   */
-  public static $listings = array(FRAMEWORK_DIR);
-  /**
-   * Ini file that will be read in
-   */
-  public static $ini_file="ini.php";
+
   /**
    * array containing all top level modules
    */
-  public static $components = array();
-  /**
-   * static array for pre init hooks, so actions such as cache can be bypass loading
-   * - takes form of:
-   *  -path to file
-   *   - class
-   *    - functions
-   * These function should load in their own dependancies - to avoid auto loader issues
-   */
-  public static $pre_functions = array();
+  public static $components = array();  
   
   public static $classes = array();
   public static $loaded = array();
@@ -86,54 +101,33 @@ class Autoloader{
   /**
    * Work out the correct file path to use from the config file
    */
-  public static function path_to($type){
-    global $TETH_CONFIG;
-    if(!$suffix = $TETH_CONFIG[$type]['suffix']) $suffix=".php";
-    if(!$path = $TETH_CONFIG[$type]['base']) $path = FRAMEWORK_DIR;
-    if($TETH_CONFIG[$type]['component']) $path .= $TETH_CONFIG[$type]['component']."/";
-    if($TETH_CONFIG[$type]['module']) $path .= $TETH_CONFIG[$type]['module']."/";
-    $path.= $TETH_CONFIG[$type]['class'].$suffix;
+  public static function path_to($type, $segment='classes'){    
+    $conf = Config::$settings[$segment];    
+    if(!$suffix = $conf[$type]['suffix']) $suffix=".php";
+    if(!$path = $conf[$type]['base']) $path = FRAMEWORK_DIR;
+    if($conf[$type]['component']) $path .= $conf[$type]['component']."/";
+    if($conf[$type]['module']) $path .= $conf[$type]['module']."/";
+    $path.= $conf[$type]['class'].$suffix;
     return $path;
   }
   /**
    * return name of the class to use for the type requested
    */
-  public static function class_for($type){
-    global $TETH_CONFIG;
-    return $TETH_CONFIG[$type]['class'];
-  }
-  /**
-   * Update the values in the config array to the new params passed in
-   */
-  public static function set_config($type, $class, $component=false, $module=false, $base=false){
-    global $TETH_CONFIG;
-    $TETH_CONFIG[$type] = array('class'=>$class, 'component'=>$component, 'module'=>$module);
-    if($base) $TETH_CONFIG[$type]['base']=rtrim($base,"/")."/";
+  public static function class_for($type, $segment='classes'){
+    $conf = Config::$settings[$segment];
+    return $conf[$type]['class'];
   }
   /**
    * Look for the class name in the config var, return the key if found
    */
-  public static function class_in_config($classname){
-    global $TETH_CONFIG;
-    foreach($TETH_CONFIG as $key=>$type){
+  public static function class_in_config($classname, $segment='classes'){
+    $conf = Config::$settings[$segment];
+    foreach($conf as $key=>$type){
       if($type['class'] == $classname) return $key;
     }
     return false;
   }
-  /**
-   * Add the hook to the array; these functions will be called
-   */
-  public static function add_pre_hook($class, $function,$path=false){
-    if(!$path) $path = FRAMEWORK_DIR.$class.".php";
-    self::$pre_functions[$path][$class][]=$function;
-  }
-  /**
-   * Remove a hook from the array
-   */
-  public static function remove_pre_hook($class, $path=false){
-    if(!$path) $path = FRAMEWORK_DIR.$class.".php";
-    if(is_array(self::$pre_functions[$path]) && self::$pre_functions[$path][$class]) unset(self::$pre_functions[$path][$class]);
-  }
+ 
   /**
    * Run over the pre init hooks - cache would a good one 
    * 
@@ -141,7 +135,7 @@ class Autoloader{
    * read in ini files
    */
   public static function pre_init_hooks(){
-    foreach(self::$pre_functions as $path=>$classes){
+    foreach(Config::$settings['pre_functions'] as $path=>$classes){
       include $path;
       foreach($classes as $class=>$functions){
         $obj = new $class;
@@ -166,7 +160,7 @@ class Autoloader{
     $iterator_class = self::class_for('ini_directory_iterator');
     if(!self::$loaded[$iterator_class]) self::load($iterator_class);
             
-    $scan = array_reverse(self::$listings); //so newer added directories have priority
+    $scan = array_reverse(Config::$settings['listings']); //so newer added directories have priority
     foreach($scan as $dir){
       //iterator
       $recurse = new RecursiveIteratorIterator(new $iterator_class($dir), true);
@@ -174,7 +168,7 @@ class Autoloader{
       foreach($recurse as $item){
         $path = $item->getPathName();
         $name = $item->getFileName();
-        if($name == "ini.php" && is_readable($path) ){
+        if($name == Config::$settings['ini_file'] && is_readable($path) ){
           $dirname = dirname($path);
           include $path;
           $compname = substr($dirname, strrpos($dirname, "/")+1);          
@@ -203,7 +197,7 @@ class Autoloader{
       foreach($recurse as $file){        
         $basename = basename($file);
         $classname = str_replace(".php","",$basename);
-        if(strstr($file, ".php") && !self::$classes[$classname] && $basename != self::$ini_file && !in_array($basename, self::$excluded) ) self::$classes[$classname] = $file->getPathName();
+        if(strstr($file, ".php") && !self::$classes[$classname] && $basename != Config::$settings['ini_file'] && !in_array($basename, self::$excluded) ) self::$classes[$classname] = $file->getPathName();
       }
     }    
   }
@@ -232,9 +226,9 @@ class Autoloader{
       self::$loaded[$classname] = self::$classes[$classname] = self::path_to($config_key);
       if(is_readable(self::$classes[$classname])) include self::$classes[$classname];
     }else if(!self::$classes[$classname]){
-      $exception_class = self::class_for('missing_class_exception');
-      $exception_path = self::path_to('missing_class_exception');
-      if(!self::$classes['missing_class_exception']) include $exception_path;
+      $exception_class = self::class_for('missing_class', 'exceptions');
+      $exception_path = self::path_to('missing_class', 'exceptions');
+      include_once $exception_path;
       throw new $exception_class("CLASS NOT FOUND - $classname");
       exit;
     }
@@ -251,19 +245,19 @@ class Autoloader{
    * Load the application class if it hasn't been 
    * Load the config file
    */
-  public static function go(){
-    global $TETH_CONFIG;
+  public static function go(){    
     $all_controllers = array();
     $application = self::class_for('application');
     if(!self::$loaded[$application]) Autoloader::load($application);    
     if(defined('SITE_NAME')){
-      $config = self::class_for('application_config_file');
-      if(!self::$loaded[$config]) Autoloader::load($config);
+      $configs = $config = Config::$settings['config'];
+      foreach($configs as $conf) if(is_readable($conf['path'].$conf['file'].$conf['suffix']) ) include $conf['path'].$conf['file'].$conf['suffix'];
       self::add_component(SITE_NAME, SITE_DIR);  
       self::register_classes(array(SITE_DIR));
       $all_controllers = self::fetch_controllers();
     }
-    $run = new $application($TETH_CONFIG, $all_controllers, true);
+
+    $run = new $application($all_controllers, true);
   }
   
 }

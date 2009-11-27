@@ -2,7 +2,7 @@
 class CoreRouter implements RouterInterface{
   //the var that handles the mapping
   public $position_map=array('controller'=>0, 'action'=>1, 'uid'=>2);
-  //default values
+  //default values - format is appended and based on config var
   public $mapped=array('controller'=>'PageController', 'action'=>'index');
   //what to split the url by
   public $separator="/";
@@ -13,12 +13,12 @@ class CoreRouter implements RouterInterface{
   public $get=array();
   public $post=array();
 
-  public function __construct($controllers, $path, $get=array(), $post=array(), $position_map=false){
+  public function __construct($controllers, $path, $get=array(), $post=array()){
     $this->controllers = $controllers;
     $this->requested_url = $path;
     $this->get = $get;
     $this->post = $post;
-    if(is_array($position_map)) $this->position_map = $position_map;
+    if(is_array(Config::$settings['position_map'])) $this->position_map = Config::$settings['position_map'];
   }
   /**
    * Mapping function to determine what controller
@@ -38,7 +38,10 @@ class CoreRouter implements RouterInterface{
     if(strlen($path)) $this->split = explode($this->separator, $path);
     
     $controller_position = $position_map['controller'];
-    $action_position = $position_map['action'];
+    $action_position = $position_map['action'];    
+    //find the formatting
+    $this->mapped['format'] = $this->format($path);
+    
     /**
      * find the controller - if its not found then use the shift function to re order & use the default
      */
@@ -51,10 +54,7 @@ class CoreRouter implements RouterInterface{
     //remove this from the map array so doesnt get looped over - already been worked out above
     unset($map['controller']);
     //go over the remaining map and get their values
-    foreach($map as $what=>$value){
-      $pos = $position_map[$what];
-      $this->mapped[$what] = $this->find($what,$pos);
-    }
+    foreach($map as $what=>$value) $this->mapped[$what] = $this->find($what, $position_map[$what]);
     //if no controller, action or method on that class then die
     if(!$this->mapped['controller'] || !$this->mapped['action'] || !method_exists($this->mapped['controller'], $this->mapped['action']))
       throw new PageNotFoundException("Page Not Found");
@@ -63,7 +63,7 @@ class CoreRouter implements RouterInterface{
       //if this isnt a public method then throw an error
       if(!$reflect->isPublic()) throw new PageNotFoundException("Page Not Found");
     }
-
+    
     return $this->mapped;
   }
   /**
@@ -82,14 +82,22 @@ class CoreRouter implements RouterInterface{
   }
 
   public function find($what, $position){
-    if($this->split[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($this->split[$position]) ) );
+    $check = $this->split[$position];
+    if(strstr($check, $this->mapped['format'])) $check = str_replace($this->mapped['format'], "", $check);
+    if($this->split[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($check) ) );
     else return $this->mapped[$what];
   }
 
   public function controller($check){
+    if(strstr($check, $this->mapped['format'])) $check = str_replace($this->mapped['format'], "", $check);
     $check = str_replace(" ","",ucwords(str_replace("_"," ",str_replace("-", "_",strtolower($check)))))."Controller";
     if(isset($this->controllers[$check])) return $check;
     else return false;
+  }
+  
+  public function format($check){
+    if(strlen($check) && ($pos = strrpos($check,".") ) ) return substr($check,$pos);
+    else return Config::$settings['default_form'];
   }
 
 }
