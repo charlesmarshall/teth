@@ -2,7 +2,7 @@
 class CoreRouter implements RouterInterface{
   //the var that handles the mapping
   public $position_map=array('controller'=>0, 'action'=>1, 'uid'=>2);
-  //default values
+  //default values - path & format are appended
   public $mapped=array('controller'=>'PageController', 'action'=>'index');
   //what to split the url by
   public $separator="/";
@@ -12,6 +12,7 @@ class CoreRouter implements RouterInterface{
   public $split=array();
   public $get=array();
   public $post=array();
+  public $format=false;
 
   public function __construct($controllers, $path, $get=array(), $post=array()){
     $this->controllers = $controllers;
@@ -60,6 +61,8 @@ class CoreRouter implements RouterInterface{
       //if this isnt a public method then throw an error
       if(!$reflect->isPublic()) throw new PageNotFoundException("Page Not Found");
     }
+    //find the formatting
+    $this->mapped['format'] = $this->format($path);
 
     return $this->mapped;
   }
@@ -87,6 +90,11 @@ class CoreRouter implements RouterInterface{
     $check = str_replace(" ","",ucwords(str_replace("_"," ",str_replace("-", "_",strtolower($check)))))."Controller";
     if(isset($this->controllers[$check])) return $check;
     else return false;
+  }
+  
+  public function format($check){
+    if(strlen($check) && ($pos = strrpos($check,".") ) ) return substr($check,$pos);
+    else return Config::$settings['default_form'];
   }
 
 }
