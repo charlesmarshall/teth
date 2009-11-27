@@ -12,7 +12,6 @@ class CoreRouter implements RouterInterface{
   public $split=array();
   public $get=array();
   public $post=array();
-  public $format=false;
 
   public function __construct($controllers, $path, $get=array(), $post=array()){
     $this->controllers = $controllers;
