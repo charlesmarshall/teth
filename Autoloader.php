@@ -72,6 +72,8 @@ Config::$settings['local_environments'] = array("127.0.0.1");
  */
 Config::$settings['position_map']=false;
 
+Config::$settings['default_form']="html";
+
 /**
  * Main auto load call
  */
