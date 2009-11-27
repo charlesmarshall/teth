@@ -12,13 +12,25 @@ class CoreController implements ControllerInterface{
   public function __construct($route, $init=true){    
     foreach($route as $key=>$val) $this->$key = $val;
     if($init) $this->init();
-    print_r($this);exit;
   }
+  
+  protected function before(){}
+  protected function after(){}
   
   protected function init(){
     if($this->controller) $this->controller_name = strtolower(str_replace("Controller","",$this->controller));
   }
   
+  public function execute(){
+    $before = Config::$settings['controller_before_action'];
+    $this->{$before}();
+    
+    $this->{$this->action}();
+    print_r($this);exit;  
+    
+    $after = Config::$settings['controller_after_action'];
+    $this->{$after}();
+  }
   
 }
 ?>
