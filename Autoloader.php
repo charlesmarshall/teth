@@ -40,9 +40,8 @@ Config::$settings['config']['application'] = array('file'=>'config', 'suffix'=>'
 /**
  * Preset error pages
  */
-Config::$settings['error_pages']['503']     = array('file'=>'503', 'suffix'=>'.html', 'path'=>PUBLIC_DIR);
-Config::$settings['error_pages']['404']     = array('file'=>'404', 'suffix'=>'.html', 'path'=>PUBLIC_DIR);
-Config::$settings['error_pages']['generic'] = array('file'=>'error', 'suffix'=>'.html', 'path'=>PUBLIC_DIR);
+
+Config::$settings['error_pages']['generic'] = array('file'=>'error', 'suffix'=>'.html', 'path'=>FRAMEWORK_DIR."/core/exceptions/error-pages/");
 /**
  * Directories to read over - app using plugins can register alternative locations for this
  * for example:
