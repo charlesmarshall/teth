@@ -34,6 +34,10 @@ class CoreController implements ControllerInterface{
     
     $this->{$this->action}();
     print_r($this);exit;  
+    //fetch view content
+    $this->view_content = $this->view();
+    //fetch layout
+    $this->layout_content = $this->layout();
     
     $after = Config::$settings['controller_after_action'];
     $this->{$after}();
