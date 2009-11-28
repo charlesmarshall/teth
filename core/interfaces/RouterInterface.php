@@ -1,6 +1,6 @@
 <?
 interface RouterInterface{
   public function map();
-  public function find($what, $where);
+  public function find($what, $where, $in);
 }
 ?>
