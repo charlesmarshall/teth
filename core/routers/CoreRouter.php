@@ -9,7 +9,6 @@ class CoreRouter implements RouterInterface{
   //storage
   public $controllers=array();
   public $requested_url=false;
-  public $split=array();
   public $get=array();
   public $post=array();
 
@@ -31,30 +30,41 @@ class CoreRouter implements RouterInterface{
    *
    */
   public function map(){
-    $map = $this->mapped;
     $position_map = $this->position_map;
     //trim down the url to remove empty array records
-    $path = ltrim($this->requested_url, $this->separator);
-    if(strlen($path)) $this->split = explode($this->separator, $path);
-    
-    $controller_position = $position_map['controller'];
-    $action_position = $position_map['action'];    
-    //find the formatting
-    $this->mapped['format'] = $this->format($path);
-    
-    /**
-     * find the controller - if its not found then use the shift function to re order & use the default
-     */
-    if(!$controller = $this->controller($this->split[$controller_position]) ){
-      $controller = $map['controller'];
-      $position_map = $this->shift($position_map, $controller_position);
-      unset($position_map['controller']);
+    $path = $this->substitute(ltrim($this->requested_url, $this->separator));  
+    if(strlen($path)) $split = array_filter(explode($this->separator, $path)); //explode & remove blanks
+    else $split = array();
+    //first off, find the controller.. look at position
+    $controller_pos = (array) $position_map['controller'];
+    //take a slice from the first part of the controller
+    $chunk = array_slice($split,$controller_pos[0]);
+    //var for class name
+    $controller=false;
+    //string for all of it
+    $cumlative="";
+    $depth=0;
+    // while not found a controller and still stuff to check, loop over 
+    while(($check = array_shift($chunk)) && !$controller){
+      //amend the strings ready for checking
+      $cumlative .= $check = str_replace(" ", "_", ucwords(str_replace("_", " ", $check)));
+      //check for current level first
+      if($this->controllers[$check."Controller"]) $controller = $check."Controller";
+      //check everything so far..
+      else if($this->controllers[$cumlative."Controller"]) $controller = $cumlative."Controller";
+      $depth++;
     }
-    $this->mapped['controller'] = $controller;
-    //remove this from the map array so doesnt get looped over - already been worked out above
-    unset($map['controller']);
-    //go over the remaining map and get their values
-    foreach($map as $what=>$value) $this->mapped[$what] = $this->find($what, $position_map[$what]);
+    //if the controller was found 
+    if($controller){
+      $this->mapped['controller'] = $controller;
+      array_splice($split, $controller_pos[0],$depth);
+    }
+    //reorder the position map
+    $position_map = $this->shift($position_map, $controller_pos[0]);
+    
+    unset($position_map['controller']);
+    
+    foreach($position_map as $what=>$value) if($found = $split[$position_map[$what]]) $this->mapped[$what] = $found;     
     //if no controller, action or method on that class then die
     if(!$this->mapped['controller'] || !$this->mapped['action'] || !method_exists($this->mapped['controller'], $this->mapped['action']))
       throw new PageNotFoundException("Page Not Found");
@@ -62,8 +72,8 @@ class CoreRouter implements RouterInterface{
       $reflect = new ReflectionMethod($this->mapped['controller'], $this->mapped['action']);
       //if this isnt a public method then throw an error
       if(!$reflect->isPublic()) throw new PageNotFoundException("Page Not Found");
-    }
-    
+    }     
+          
     return $this->mapped;
   }
   /**
@@ -73,18 +83,18 @@ class CoreRouter implements RouterInterface{
    * - splice the item at position out of the array
    * - flip it back for the new positions of each item in the position_map
    */
-  public function shift($array, $position){
+  public function shift($array, $position, $length=1){
     $flip = array_flip($array);
     ksort($flip);
-    array_splice($flip, $position,1);
+    array_splice($flip, $position,$length);
     $new = array_flip($flip);
     return $new;
   }
 
-  public function find($what, $position){
-    $check = $this->split[$position];
+  public function find($what, $position, $in){
+    $check = $in[$position];
     if(strstr($check, $this->mapped['format'])) $check = str_replace($this->mapped['format'], "", $check);
-    if($this->split[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($check) ) );
+    if($in[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($check) ) );
     else return $this->mapped[$what];
   }
 
@@ -100,5 +110,9 @@ class CoreRouter implements RouterInterface{
     else return Config::$settings['default_format'];
   }
 
+
+  public function substitute($original, $pattern="/[^a-zA-Z0-9\s\/]/", $replace="_"){
+    return strtolower(preg_replace($pattern, $replace, $original));
+  }
 }
 ?>
