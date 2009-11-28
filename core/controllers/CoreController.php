@@ -23,6 +23,7 @@ class CoreController implements ControllerInterface{
       $name = str_replace("Controller","",$this->controller);
       foreach(split("/[A-Z]/", $name) as $val) $this->folder .= strtolower($val)."/";
     }
+  }
   
   protected function view(){
     
