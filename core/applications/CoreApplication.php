@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Skel file that doesn't do much, just calls other things
  */
