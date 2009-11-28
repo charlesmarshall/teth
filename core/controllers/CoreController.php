@@ -23,6 +23,7 @@ class CoreController implements ControllerInterface{
       $name = str_replace("Controller","",$this->controller);
       foreach(split("/[A-Z]/", $name) as $val) $this->folder .= strtolower($val)."/";
     }
+  }
   
   protected function view(){
     
@@ -32,12 +33,13 @@ class CoreController implements ControllerInterface{
     
   }
   
+  
   public function execute(){
     $before = Config::$settings['controller_before_action'];
     $this->{$before}();
     
+    //call the function
     $this->{$this->action}();
-    print_r($this);exit;  
     //fetch view content
     $this->view_content = $this->view();
     //fetch layout
