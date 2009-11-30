@@ -17,7 +17,7 @@ class CoreRouter implements RouterInterface{
     $this->requested_url = $path;
     $this->get = $get;
     $this->post = $post;
-    if(is_array(Config::$settings['position_map'])) $this->position_map = Config::$settings['position_map'];
+    if(is_array(Config::$settings['position_map'])) $this->position_map = array_merge($this->position_map, Config::$settings['position_map']);
   }
   /**
    * Mapping function to determine what controller
