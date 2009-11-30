@@ -9,14 +9,13 @@ class CoreRouter implements RouterInterface{
   //storage
   public $controllers=array();
   public $requested_url=false;
-  public $get=array();
+  public $request_data=array();
   public $post=array();
 
-  public function __construct($controllers, $path, $get=array(), $post=array()){
+  public function __construct($controllers, $path, $request=array()){
     $this->controllers = $controllers;
     $this->requested_url = $path;
-    $this->get = $get;
-    $this->post = $post;
+    $this->request_data = $request;
     if(is_array(Config::$settings['position_map'])) $this->position_map = array_merge($this->position_map, Config::$settings['position_map']);
   }
   /**
@@ -33,6 +32,7 @@ class CoreRouter implements RouterInterface{
     $position_map = $this->position_map;
     $path = ltrim($this->requested_url, $this->separator);
     $this->mapped['format'] = $this->format($path);
+    $this->mapped['request_data'] = $this->request_data;
     //trim down the url to remove empty array records
     $path = $this->substitute($path);  
     if(strlen($path)) $split = array_filter(explode($this->separator, $path)); //explode & remove blanks
@@ -77,7 +77,7 @@ class CoreRouter implements RouterInterface{
       //if this isnt a public method then throw an error
       if(!$reflect->isPublic()) throw new PageNotFoundException("Page Not Found");
     }     
-          
+        
     return $this->mapped;
   }
   /**

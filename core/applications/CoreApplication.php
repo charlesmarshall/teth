@@ -40,7 +40,7 @@ class CoreApplication implements ApplicationInterface{
     $parsed = parse_url($_SERVER['REQUEST_URI']);
     //figure out the routing
     $router_class = Config::$settings['classes']['router']['class'];
-    $this->router = new $router_class($this->available_controllers, $parsed['path'], $_GET, $_POST);
+    $this->router = new $router_class($this->available_controllers, $parsed['path'], $_REQUEST);
     return $this->router->map();        
   }
 
