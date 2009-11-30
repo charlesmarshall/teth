@@ -7,8 +7,7 @@ class CoreController implements ControllerInterface{
   public $uid=false;
   public $format=false;
   //file name of the view to be rendered
-  public $view=false;
-  
+  public $view="index";
   public $layout="application";
   
   public function __construct($route, $init=true){    
@@ -17,8 +16,7 @@ class CoreController implements ControllerInterface{
   }
   
   protected function before(){}
-  protected function after(){}
-  
+  protected function after(){}  
   protected function init(){}
   
   protected function view(){
