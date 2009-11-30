@@ -22,10 +22,8 @@ class CoreController implements ControllerInterface{
   protected function view(){
     $view = new CoreView($this);
     if(!$this->view = $view->indentifier()) throw new NoViewFoundException("No View Found for - {$this->controller}->{$this->action}");
-    
-  }
-  
-  
+    else return $view->content();
+  }  
   
   protected function layout(){
     
