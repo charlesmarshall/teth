@@ -6,8 +6,11 @@ class CoreController implements ControllerInterface{
   public $action=false;
   public $uid=false;
   public $format=false;
-  //folder to look for views
-  public $folder="";
+  //folders to look in
+  public $folders=array(); //pulled from the config class
+  //file name of the view to be rendered
+  public $view=false;
+  
   public $layout="application";
   
   public function __construct($route, $init=true){    
