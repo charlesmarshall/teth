@@ -31,10 +31,13 @@ class CoreRouter implements RouterInterface{
    */
   public function map(){
     $position_map = $this->position_map;
+    $path = ltrim($this->requested_url, $this->separator);
+    $this->mapped['format'] = $this->format($path);
     //trim down the url to remove empty array records
-    $path = $this->substitute(ltrim($this->requested_url, $this->separator));  
+    $path = $this->substitute($path);  
     if(strlen($path)) $split = array_filter(explode($this->separator, $path)); //explode & remove blanks
     else $split = array();
+    
     //first off, find the controller.. look at position
     $controller_pos = (array) $position_map['controller'];
     //take a slice from the first part of the controller
@@ -64,7 +67,8 @@ class CoreRouter implements RouterInterface{
     
     unset($position_map['controller']);
     
-    foreach($position_map as $what=>$value) if($found = $split[$position_map[$what]]) $this->mapped[$what] = $found;     
+    foreach($position_map as $what=>$value) if($found = $split[$position_map[$what]]) $this->mapped[$what] = $found;
+    
     //if no controller, action or method on that class then die
     if(!$this->mapped['controller'] || !$this->mapped['action'] || !method_exists($this->mapped['controller'], $this->mapped['action']))
       throw new PageNotFoundException("Page Not Found");
@@ -90,12 +94,9 @@ class CoreRouter implements RouterInterface{
     $new = array_flip($flip);
     return $new;
   }
-
-  public function find($what, $position, $in){
-    $check = $in[$position];
-    if(strstr($check, $this->mapped['format'])) $check = str_replace($this->mapped['format'], "", $check);
-    if($in[$position]) return str_replace("_"," ",str_replace("-", "_",strtolower($check) ) );
-    else return $this->mapped[$what];
+  
+  public function replace_format($original, $format, $replacement=""){
+    return str_replace($format, $replacement, $original);
   }
 
   public function controller($check){
@@ -110,9 +111,8 @@ class CoreRouter implements RouterInterface{
     else return Config::$settings['default_format'];
   }
 
-
   public function substitute($original, $pattern="/[^a-zA-Z0-9\s\/]/", $replace="_"){
-    return strtolower(preg_replace($pattern, $replace, $original));
+    return strtolower(preg_replace($pattern, $replace, $this->replace_format($original, $this->mapped['format'])));
   }
 }
 ?>
