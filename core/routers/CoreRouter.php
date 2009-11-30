@@ -99,12 +99,6 @@ class CoreRouter implements RouterInterface{
     return str_replace($format, $replacement, $original);
   }
 
-  public function controller($check){
-    if(strstr($check, $this->mapped['format'])) $check = str_replace($this->mapped['format'], "", $check);
-    $check = str_replace(" ","",ucwords(str_replace("_"," ",str_replace("-", "_",strtolower($check)))))."Controller";
-    if(isset($this->controllers[$check])) return $check;
-    else return false;
-  }
   
   public function format($check){
     if(strlen($check) && ($pos = strrpos($check,".") ) ) return substr($check,$pos);
