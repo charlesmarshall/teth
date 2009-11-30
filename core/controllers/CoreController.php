@@ -2,10 +2,10 @@
 class CoreController implements ControllerInterface{
   
   //default route items
-  public $controller="";
-  public $action="";
-  public $uid="";
-  public $format="";
+  public $controller=false;
+  public $action=false;
+  public $uid=false;
+  public $format=false;
   //folder to look for views
   public $folder="";
   public $layout="application";
