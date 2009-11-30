@@ -75,6 +75,10 @@ Config::$settings['position_map']=false;
  * Default file extension and key used for mime type (minus the .)
  */
 Config::$settings['default_format']=".html";
+/**
+ * An array of locations to look for layouts and views
+ */
+Config::$settings['view_directories'] = array(APP_DIR."view/");
 Config::$settings['controller_before_action'] = "before";
 Config::$settings['controller_after_action'] = "after";
 
