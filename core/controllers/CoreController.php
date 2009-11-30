@@ -6,8 +6,6 @@ class CoreController implements ControllerInterface{
   public $action=false;
   public $uid=false;
   public $format=false;
-  //folders to look in
-  public $folders=array(); //pulled from the config class
   //file name of the view to be rendered
   public $view=false;
   
@@ -24,8 +22,12 @@ class CoreController implements ControllerInterface{
   protected function init(){}
   
   protected function view(){
+    $view = new CoreView($this);
+    if(!$this->view = $view->indentifier()) throw new NoViewFoundException("No View Found for - {$this->controller}->{$this->action}");
     
   }
+  
+  
   
   protected function layout(){
     
