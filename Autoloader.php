@@ -71,9 +71,10 @@ Config::$settings['local_environments'] = array("127.0.0.1");
  * Gets merged into the Router class
  */
 Config::$settings['position_map']=false;
-
+/**
+ * Default file extension and key used for mime type (minus the .)
+ */
 Config::$settings['default_format']=".html";
-
 Config::$settings['controller_before_action'] = "before";
 Config::$settings['controller_after_action'] = "after";
 
