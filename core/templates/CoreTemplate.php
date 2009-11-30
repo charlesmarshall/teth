@@ -26,5 +26,12 @@ class CoreTemplate implements TemplateInterface{
     return $this->indentifier;    
   }
   
+  public function content(){
+    ob_start();
+    extract((array)$this->controller);
+    include $this->indentifier;
+    return ob_get_clean();
+  }
+  
 }
 ?>
