@@ -46,7 +46,7 @@ class CoreController implements ControllerInterface{
     //call the function
     $this->{$this->action}();
     //fetch view content
-    $this->view_content = $this->view();
+    $this->content_for_layout = $this->view();
     //fetch layout
     $this->layout_content = $this->layout();
     
