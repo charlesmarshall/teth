@@ -25,7 +25,8 @@ class CoreController implements ControllerInterface{
     $this->folders = array_merge($this->folders, Config::$settings['view_directories']);
     if($this->controller){
       $name = str_replace("Controller","",$this->controller);
-      foreach(split("/[A-Z]/", $name) as $val) $this->folder .= strtolower($val)."/";
+      foreach(split("/[A-Z]/", $name) as $val) $this->view .= strtolower($val)."/";
+      $this->view.=$this->action.$this->format;
     }
   }
   
