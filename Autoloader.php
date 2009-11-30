@@ -68,6 +68,7 @@ Config::$settings['local_environments'] = array("127.0.0.1");
 /**
  * Mapping for urls
  * - takes this format: array('controller'=>'PageController', 'action'=>'index');
+ * Gets merged into the Router class
  */
 Config::$settings['position_map']=false;
 
