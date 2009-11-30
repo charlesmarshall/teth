@@ -110,8 +110,8 @@ class Autoloader{
    * Work out the correct file path to use from the config file
    */
   public static function path_to($type, $segment='classes'){    
-    $conf = Config::$settings[$segment];  
-    if(!is_array($conf)) return false;  
+    $conf = Config::$settings[$segment];
+    if(!is_array($conf[$type]) || !$conf[$type]['class']) return false;
     if(!$suffix = $conf[$type]['suffix']) $suffix=".php";
     if(!$path = $conf[$type]['base']) $path = FRAMEWORK_DIR;
     if($conf[$type]['component']) $path .= $conf[$type]['component']."/";
