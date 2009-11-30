@@ -26,9 +26,10 @@ class CoreController implements ControllerInterface{
   }  
   
   protected function layout(){
-    
-  }
-  
+    $layout = new CoreLayout($this);
+    if(!$this->layout = $layout->indentifier()) throw new NoLayoutFoundException("No Layout Found for - {$this->controller}->{$this->action}");
+    else return $layout->content();
+  }  
   
   public function execute(){
     $before = Config::$settings['controller_before_action'];
@@ -39,9 +40,9 @@ class CoreController implements ControllerInterface{
     $this->content_for_layout = $this->view();
     //fetch layout
     $this->layout_content = $this->layout();
-    
     $after = Config::$settings['controller_after_action'];
     $this->{$after}();
+    
   }
   
 }
