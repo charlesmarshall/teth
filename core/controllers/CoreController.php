@@ -43,6 +43,7 @@ class CoreController implements ControllerInterface{
     $after = Config::$settings['controller_after_action'];
     $this->{$after}();
     
+    echo ">>".$this->layout_content."<<";
   }
   
 }
