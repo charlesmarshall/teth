@@ -34,8 +34,7 @@ class CoreController implements ControllerInterface{
   
   public function execute(){
     $before = Config::$settings['controller_before_action'];
-    $this->{$before}();
-    
+    $this->{$before}();    
     //call the function
     $this->{$this->action}();
     //fetch view content
