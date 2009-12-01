@@ -42,7 +42,12 @@ class CoreApplication implements ApplicationInterface{
   }
   
   public function headers(){
-    $mime = Config::$settings['mime_types'];
+    $format = $this->routing_map['format'];
+    $ext = str_replace(".","", $format);
+    
+    if(!headers_sent() && ($mime = Config::$settings['mime_headers'][$ext])){
+      foreach($mime as $index=>$value) if(is_numeric($index)) header($value);
+    }
   }
 
   public function exec(){
@@ -52,6 +57,7 @@ class CoreApplication implements ApplicationInterface{
     $this->environment();
     $this->routing_map = $this->route();
     $this->setup();
+    
     $this->headers();
     //data for the template - this way treats it as a layout and not a view/partial .. would be nice if they were all the same
     $data = array('routing_map'=>$this->routing_map, 'environment'=>$this->environment, 'is_layout'=>APP_DIR."view/layouts/");
