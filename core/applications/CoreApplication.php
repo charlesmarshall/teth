@@ -13,6 +13,8 @@ class CoreApplication implements ApplicationInterface{
   public $entry_controller = false;
 
   public $router = false;
+  
+  public $original_path = "";
 
   public function __construct($init=false){
     if($init) $this->exec();
