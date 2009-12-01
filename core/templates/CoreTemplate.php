@@ -12,7 +12,7 @@ class CoreTemplate implements TemplateInterface{
   }
   
   public function init(){
-    self::render($this->data->original_path, $this->data);
+    echo self::render($this->data->original_path, $this->data);
   }
   
   public function indentifier(){
