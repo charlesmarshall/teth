@@ -48,13 +48,10 @@ class CoreApplication implements ApplicationInterface{
     $this->environment();
     $this->routing_map = $this->route();
     $this->setup();
-
-    $entry_controller_class = $this->routing_map['controller'];
-    $this->entry_controller = new $entry_controller_class($this->routing_map);
-    $application_output = CoreTemplate::render($this->entry_controller->layout);
+    $data = array('routing_map'=>$this->routing_map, 'environment'=>$this->environment, 'is_layout'=>APP_DIR."view/layouts/");
+    $template = new CoreTemplate($data, true);
     
     $this->post_exec();
-    echo $application_output;
   }
   //save to cache?
   public function post_exec(){}
