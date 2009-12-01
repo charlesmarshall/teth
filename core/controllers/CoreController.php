@@ -7,11 +7,11 @@ class CoreController implements ControllerInterface{
   public $uid=false;
   public $format=false;
   //file name of the view to be rendered
-  public $view="index";
-  public $layout="application";
+  public $use_view="index";
+  public $use_layout="application";
   
-  public function __construct($route, $init=true){    
-    foreach($route as $key=>$val) $this->$key = $val;
+  public function __construct($data, $init=true){   
+    foreach($data as $key=>$val) $this->$key = $val;
     if($init) $this->init();
   }
   
@@ -26,15 +26,13 @@ class CoreController implements ControllerInterface{
     
     //call the action
     $this->{$this->action}();
-
-    $view = new CoreTemplate($this);
-    if(!$this->view = $view->indentifier()) throw new NoLayoutFoundException("No Layout Found for - {$this->controller}->{$this->action}");
-    else $this->view_content = $view->content();
     
+    $template = new CoreTemplate($this);
+    $this->content = $template->content();
     $after = Config::$settings['controller_after_action'];
     $this->{$after}();
     
-    return $this->view_content;
+    return $this->content;
   }
   
 }
