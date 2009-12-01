@@ -42,6 +42,8 @@ class CoreApplication implements ApplicationInterface{
   }
 
   public function exec(){
+    $this->original_path = $_SERVER['REQUEST_URI'];
+    
     $this->pre_exec();
     $this->environment();
     $this->routing_map = $this->route();
