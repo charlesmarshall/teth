@@ -34,7 +34,7 @@ class CoreApplication implements ApplicationInterface{
   public function pre_exec(){}
 
   public function route(){
-    $parsed = parse_url($_SERVER['REQUEST_URI']);
+    $parsed = parse_url($this->original_path);
     //figure out the routing
     $router_class = Config::$settings['classes']['router']['class'];
     $this->router = new $router_class(Autoloader::$controllers, $parsed['path'], $_GET, $_POST);
