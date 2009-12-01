@@ -64,7 +64,7 @@ class CoreTemplate implements TemplateInterface{
     }     
     $content = $controller->execute();  
     /** need to handle mime types here if headers havent been sent **/
-    echo $content;
+    return $content;
     
   }
 }
