@@ -10,8 +10,6 @@ class CoreApplication implements ApplicationInterface{
 
   public $routing_map = array();
 
-  public $entry_controller = false;
-
   public $router = false;
   
   public $original_path = "";
