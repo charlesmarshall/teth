@@ -9,8 +9,8 @@ class CoreApplication implements ApplicationInterface{
   public $environment = "development";
 
   public $routing_map = array();
-  
-  public $controller_model = false;
+
+  public $entry_controller = false;
 
   public $router = false;
 
@@ -46,12 +46,13 @@ class CoreApplication implements ApplicationInterface{
     $this->environment();
     $this->routing_map = $this->route();
     $this->setup();
-    
-    $model_name = $this->routing_map['controller'];
-    $this->controller_model = new $model_name($this->routing_map);
-    $this->controller_model->execute();
+
+    $entry_controller_class = $this->routing_map['controller'];
+    $this->entry_controller = new $entry_controller_class($this->routing_map);
+    $application_output = CoreTemplate::render($this->entry_controller->layout);
     
     $this->post_exec();
+    echo $application_output;
   }
   //save to cache?
   public function post_exec(){}
