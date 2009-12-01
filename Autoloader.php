@@ -79,7 +79,16 @@ Config::$settings['default_format']=".html";
  * An array of locations to look for layouts and views
  */
 Config::$settings['view_directories'] = array(APP_DIR."view/");
-
+/**
+ *
+ */
+Config::$settings['mime_headers'] = array(
+                                      'html'  =>  array("Content-Type: text/html", "Expires: ".gmdate(DATE_RFC822, time() + (60*60*24) ) ),
+                                      'xml'   =>  array("Content-Type: application/xml"),
+                                      'rss'   =>  array("Content-Type: application/rss+xml"),
+                                      'js'    =>  array("Content-Type: text/javascript"),
+                                      'json'  =>  array("Content-Type: application/json")
+                                          );
 
 /**
  * Main auto load call
