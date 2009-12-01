@@ -36,5 +36,14 @@ class CoreTemplate implements TemplateInterface{
     return ob_get_clean();
   }
   
+  public static function render($path, $data = false){
+    $parsed = parse_url($path);
+    $router_class = Config::$settings['classes']['router']['class'];
+    $router = new $router_class(Autoloader::$controllers, $parsed['path']);
+    $routing_map = $router->map();
+    $controller_class = $routing_map['controller'];
+    $controller = new $controller_class($routing_map);
+    return $controller->execute();
+  }
 }
 ?>
