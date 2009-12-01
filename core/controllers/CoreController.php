@@ -19,31 +19,22 @@ class CoreController implements ControllerInterface{
   protected function after(){}  
   protected function init(){}
   
-  protected function view(){
-    $view = new CoreView($this);
-    if(!$this->view = $view->indentifier()) throw new NoViewFoundException("No View Found for - {$this->controller}->{$this->action}");
-    else return $view->content();
-  }  
-  
-  protected function layout(){
-    $layout = new CoreLayout($this);
-    if(!$this->layout = $layout->indentifier()) throw new NoLayoutFoundException("No Layout Found for - {$this->controller}->{$this->action}");
-    else return $layout->content();
-  }  
-  
+  public function application(){}
   public function execute(){
     $before = Config::$settings['controller_before_action'];
     $this->{$before}();    
-    //call the function
+    
+    //call the action
     $this->{$this->action}();
-    //fetch view content
-    $this->content_for_layout = $this->view();
-    //fetch layout
-    $this->layout_content = $this->layout();
+
+    $view = new CoreTemplate($this);
+    if(!$this->view = $view->indentifier()) throw new NoLayoutFoundException("No Layout Found for - {$this->controller}->{$this->action}");
+    else $this->view_content = $view->content();
+    
     $after = Config::$settings['controller_after_action'];
     $this->{$after}();
     
-    echo ">>".$this->layout_content."<<";
+    return $this->view_content;
   }
   
 }
