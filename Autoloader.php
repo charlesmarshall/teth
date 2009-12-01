@@ -79,7 +79,6 @@ Config::$settings['default_format']=".html";
  * An array of locations to look for layouts and views
  */
 Config::$settings['view_directories'] = array(APP_DIR."view/");
-Config::$settings['layout_directories'] = array(APP_DIR."view/layouts/");
 /**
  * So you can customise before & after rendering calls
  */
