@@ -106,6 +106,7 @@ class Autoloader{
   
   public static $classes = array();
   public static $loaded = array();
+  public static $controllers = array();
   public static $excluded = array('index.php','config.php','production.php', 'development.php', 'environment.php');
   /**
    * Work out the correct file path to use from the config file
@@ -249,6 +250,7 @@ class Autoloader{
   public static function fetch_controllers(){
     $found = array();
     foreach(Autoloader::$classes as $class=>$path) if(strstr($path, CONTROLLER_DIR)) $found[$class] = $path;
+    Autoloader::$controllers = $found;
     return $found;
   }
   /**

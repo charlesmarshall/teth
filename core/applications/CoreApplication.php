@@ -8,16 +8,13 @@ class CoreApplication implements ApplicationInterface{
    */
   public $environment = "development";
 
-  public $available_controllers = array();
-
   public $routing_map = array();
   
   public $controller_model = false;
 
   public $router = false;
 
-  public function __construct($available_controllers=array(), $init=false){
-    $this->available_controllers = $available_controllers;
+  public function __construct($init=false){
     if($init) $this->exec();
   }
   /**
@@ -40,8 +37,8 @@ class CoreApplication implements ApplicationInterface{
     $parsed = parse_url($_SERVER['REQUEST_URI']);
     //figure out the routing
     $router_class = Config::$settings['classes']['router']['class'];
-    $this->router = new $router_class($this->available_controllers, $parsed['path'], $_GET, $_POST);
-    return $this->router->map();        
+    $this->router = new $router_class(Autoloader::$controllers, $parsed['path'], $_GET, $_POST);
+    return $this->router->map();
   }
 
   public function exec(){
