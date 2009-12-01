@@ -8,16 +8,13 @@ class CoreApplication implements ApplicationInterface{
    */
   public $environment = "development";
 
-  public $available_controllers = array();
-
   public $routing_map = array();
-  
-  public $controller_model = false;
 
   public $router = false;
+  
+  public $original_path = "";
 
-  public function __construct($available_controllers=array(), $init=false){
-    $this->available_controllers = $available_controllers;
+  public function __construct($init=false){
     if($init) $this->exec();
   }
   /**
@@ -37,22 +34,34 @@ class CoreApplication implements ApplicationInterface{
   public function pre_exec(){}
 
   public function route(){
-    $parsed = parse_url($_SERVER['REQUEST_URI']);
+    $parsed = parse_url($this->original_path);
     //figure out the routing
     $router_class = Config::$settings['classes']['router']['class'];
-    $this->router = new $router_class($this->available_controllers, $parsed['path'], $_REQUEST);
-    return $this->router->map();        
+    $this->router = new $router_class(Autoloader::$controllers, $parsed['path'], $_GET, $_POST);
+    return $this->router->map();
+  }
+  
+  public function headers(){
+    $format = $this->routing_map['format'];
+    $ext = str_replace(".","", $format);
+    
+    if(!headers_sent() && ($mime = Config::$settings['mime_headers'][$ext])){
+      foreach($mime as $index=>$value) if(is_numeric($index)) header($value);
+    }
   }
 
   public function exec(){
+    $this->original_path = $_SERVER['REQUEST_URI'];
+    
     $this->pre_exec();
     $this->environment();
     $this->routing_map = $this->route();
     $this->setup();
     
-    $model_name = $this->routing_map['controller'];
-    $this->controller_model = new $model_name($this->routing_map);
-    $this->controller_model->execute();
+    $this->headers();
+    //data for the template - this way treats it as a layout and not a view/partial .. would be nice if they were all the same
+    $data = array('routing_map'=>$this->routing_map, 'environment'=>$this->environment, 'is_layout'=>APP_DIR."view/layouts/");
+    $template = new CoreTemplate($data, true);
     
     $this->post_exec();
   }

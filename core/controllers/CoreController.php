@@ -7,11 +7,11 @@ class CoreController implements ControllerInterface{
   public $uid=false;
   public $format=false;
   //file name of the view to be rendered
-  public $view="index";
-  public $layout="application";
+  public $use_view="index";
+  public $use_layout="application";
   
-  public function __construct($route, $init=true){    
-    foreach($route as $key=>$val) $this->$key = $val;
+  public function __construct($data, $init=true){   
+    foreach($data as $key=>$val) $this->$key = $val;
     if($init) $this->init();
   }
   
@@ -19,31 +19,15 @@ class CoreController implements ControllerInterface{
   protected function after(){}  
   protected function init(){}
   
-  protected function view(){
-    $view = new CoreView($this);
-    if(!$this->view = $view->indentifier()) throw new NoViewFoundException("No View Found for - {$this->controller}->{$this->action}");
-    else return $view->content();
-  }  
-  
-  protected function layout(){
-    $layout = new CoreLayout($this);
-    if(!$this->layout = $layout->indentifier()) throw new NoLayoutFoundException("No Layout Found for - {$this->controller}->{$this->action}");
-    else return $layout->content();
-  }  
-  
+  public function application(){}
   public function execute(){
-    $before = Config::$settings['controller_before_action'];
-    $this->{$before}();    
-    //call the function
+    //call the action
     $this->{$this->action}();
-    //fetch view content
-    $this->content_for_layout = $this->view();
-    //fetch layout
-    $this->layout_content = $this->layout();
-    $after = Config::$settings['controller_after_action'];
-    $this->{$after}();
     
-    echo ">>".$this->layout_content."<<";
+    $template = new CoreTemplate($this);
+    $this->content = $template->content();
+    
+    return $this->content;
   }
   
 }
