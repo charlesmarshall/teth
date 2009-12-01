@@ -21,16 +21,11 @@ class CoreController implements ControllerInterface{
   
   public function application(){}
   public function execute(){
-    $before = Config::$settings['controller_before_action'];
-    $this->{$before}();    
-    
     //call the action
     $this->{$this->action}();
     
     $template = new CoreTemplate($this);
     $this->content = $template->content();
-    $after = Config::$settings['controller_after_action'];
-    $this->{$after}();
     
     return $this->content;
   }

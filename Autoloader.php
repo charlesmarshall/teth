@@ -79,11 +79,7 @@ Config::$settings['default_format']=".html";
  * An array of locations to look for layouts and views
  */
 Config::$settings['view_directories'] = array(APP_DIR."view/");
-/**
- * So you can customise before & after rendering calls
- */
-Config::$settings['controller_before_action'] = "before";
-Config::$settings['controller_after_action'] = "after";
+
 
 /**
  * Main auto load call
