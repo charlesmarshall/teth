@@ -40,6 +40,10 @@ class CoreApplication implements ApplicationInterface{
     $this->router = new $router_class(Autoloader::$controllers, $parsed['path'], $_GET, $_POST);
     return $this->router->map();
   }
+  
+  public function headers(){
+    $mime = Config::$settings['mime_types'];
+  }
 
   public function exec(){
     $this->original_path = $_SERVER['REQUEST_URI'];
@@ -48,6 +52,8 @@ class CoreApplication implements ApplicationInterface{
     $this->environment();
     $this->routing_map = $this->route();
     $this->setup();
+    $this->headers();
+    //data for the template - this way treats it as a layout and not a view/partial .. would be nice if they were all the same
     $data = array('routing_map'=>$this->routing_map, 'environment'=>$this->environment, 'is_layout'=>APP_DIR."view/layouts/");
     $template = new CoreTemplate($data, true);
     
