@@ -62,6 +62,11 @@ Config::$settings['ini_file'] = "ini.php";
  */
 Config::$settings['pre_functions'] = array();
 /**
+ * just like the pre functions... but these are run in the post_exec function
+ * on the application controller
+ */
+Config::$settings['post_functions'] = array();
+/**
  * ip address for local environments
  */
 Config::$settings['local_environments'] = array("127.0.0.1");
