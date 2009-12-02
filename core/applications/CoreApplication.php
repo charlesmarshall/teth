@@ -58,11 +58,12 @@ class CoreApplication implements ApplicationInterface{
     $this->routing_map = $this->route();
     $this->setup();
     
-    $this->headers();
+    $controller = new $this->routing_map['controller'](false);
     //data for the template - this way treats it as a layout and not a view/partial .. would be nice if they were all the same
     $data = array('routing_map'=>$this->routing_map, 'environment'=>$this->environment, 'is_layout'=>APP_DIR."view/layouts/");
-    $template = new CoreTemplate($data, true);
-    
+    $content = CoreTemplate::render($controller->use_layout, $data);
+    $this->headers();
+    echo $content;
     $this->post_exec();
   }
   //save to cache?
