@@ -71,11 +71,11 @@ class CoreRouter implements RouterInterface{
     
     //if no controller, action or method on that class then die
     if(!$this->mapped['controller'] || !$this->mapped['action'] || !method_exists($this->mapped['controller'], $this->mapped['action']))
-      throw new PageNotFoundException("Page Not Found");
+      throw new Config::$settings['exceptions']['page_not_found']['class']("Page not found", 404);
     else{
       $reflect = new ReflectionMethod($this->mapped['controller'], $this->mapped['action']);
       //if this isnt a public method then throw an error
-      if(!$reflect->isPublic()) throw new PageNotFoundException("Page Not Found");
+      if(!$reflect->isPublic()) throw new Config::$settings['exceptions']['page_not_found']['class']("Page not found", 404);
     }     
         
     return $this->mapped;
