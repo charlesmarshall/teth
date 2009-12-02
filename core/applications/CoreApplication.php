@@ -3,17 +3,14 @@
  * Skel file that doesn't do much, just calls other things
  */
 class CoreApplication implements ApplicationInterface{
-  /**
-   * Default the env to development
-   */
+  //Default the env to development
   public $environment = "development";
-
+  //the route to call
   public $routing_map = array();
-
+  //the router thats in use
   public $router = false;
-  
+  //the url that triggered the application
   public $original_path = "";
-
   public function __construct($init=false){
     if($init) $this->exec();
   }
