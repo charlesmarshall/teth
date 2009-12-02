@@ -20,10 +20,7 @@ class CoreTemplate implements TemplateInterface{
     $pattern = '/(?<=\\w)(?=[A-Z])/';
     $base = APP_DIR."view/";
     $parts = preg_split($pattern, str_replace("Controller", "", $config['controller']));
-    foreach($parts as $part){
-      $base.= strtolower($part)."/";
-      $folders[] = $base;
-    }
+    foreach($parts as $part) $base.= $folders[] = $base.strtolower($part)."/";
     if($config['is_layout']){
       $folders = array_merge((array) $config['is_layout'], $folders);
       $file = $config['use_layout'].$config['format'];
