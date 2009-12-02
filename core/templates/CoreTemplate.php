@@ -91,10 +91,7 @@ class CoreTemplate implements TemplateInterface{
       $controller_class = $data['controller'];
       $controller = new $controller_class($data);
     }else return false; 
-    $content = $controller->execute();  
-    /** need to handle mime types here if headers havent been sent **/
-    return $content;
-    
+    return $controller->execute();    
   }
 }
 ?>
