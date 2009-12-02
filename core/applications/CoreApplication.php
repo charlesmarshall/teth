@@ -11,6 +11,9 @@ class CoreApplication implements ApplicationInterface{
   public $router = false;
   //the url that triggered the application
   public $original_path = "";
+  //content to be outputed
+  public $content = "";
+  
   //if pass in true it will automatically run
   public function __construct($init=false){
     if($init) $this->exec();
@@ -68,7 +71,7 @@ class CoreApplication implements ApplicationInterface{
     $controller = new $this->routing_map['controller'](false);
     //data for the template - this way treats it as a layout and not a view/partial .. would be nice if they were all the same
     $data = array('routing_map'=>$this->routing_map, 'environment'=>$this->environment, 'is_layout'=>APP_DIR."view/layouts/");
-    $content = CoreTemplate::render($controller->use_layout, $data);
+    $this->content = CoreTemplate::render($controller->use_layout, $data);
     $this->headers();
     echo $content;
     $this->post_exec();
