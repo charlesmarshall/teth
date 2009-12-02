@@ -84,8 +84,21 @@ class CoreApplication implements ApplicationInterface{
     $this->post_exec();
     echo $this->content;
   }
-  //a good place to save $this->content to cache ..
-  public function post_exec(){}
+  /**
+   * post exec function to loop over post functions array and
+   * call the relevant functions
+   * -> a good place to save $this->content to cache ..
+   */
+  public function post_exec(){
+    if(!is_array(Config::$settings['post_functions'])) return;
+    foreach(Config::$settings['post_functions'] as $path=>$classes){
+      foreach($classes as $class=>$functions){
+        $obj = new $class;
+        foreach($functions as $func) $obj->$func();       
+      }      
+    }
+    
+  }
 
 }
 
