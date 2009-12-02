@@ -11,11 +11,13 @@ class CoreApplication implements ApplicationInterface{
   public $router = false;
   //the url that triggered the application
   public $original_path = "";
+  //if pass in true it will automatically run
   public function __construct($init=false){
     if($init) $this->exec();
   }
   /**
    * Work out if this is a local or live environment
+   * by comparing it to local environment ip list
    */
   public function environment(){
     if(!defined('ENV')){
@@ -29,7 +31,11 @@ class CoreApplication implements ApplicationInterface{
   public function setup(){}
   //ideal place to connect to db
   public function pre_exec(){}
-
+  /**
+   * - parse the url that triggered this application
+   * - get router class from the config & create a new instance
+   * - return the map 
+   */
   public function route(){
     $parsed = parse_url($this->original_path);
     //figure out the routing
