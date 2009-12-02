@@ -83,7 +83,7 @@ Config::$settings['view_directories'] = array(APP_DIR."view/");
  *
  */
 Config::$settings['mime_headers'] = array(
-                                      'html'  =>  array("Content-Type: text/html", "Expires: ".gmdate(DATE_RFC822, time() + (60*60*24) ) ),
+                                      'html'  =>  array("Content-Type: text/html", "Expires: ".gmdate("D, d M Y H:i:s T", time() + (60*60*24*3) ), 'X-Powered-By: teth v1' ),
                                       'xml'   =>  array("Content-Type: application/xml"),
                                       'rss'   =>  array("Content-Type: application/rss+xml"),
                                       'js'    =>  array("Content-Type: text/javascript"),
