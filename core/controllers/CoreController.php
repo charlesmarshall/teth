@@ -11,7 +11,7 @@ class CoreController implements ControllerInterface{
   public $use_layout="application";
   
   public function __construct($data, $init=true){   
-    foreach($data as $key=>$val) $this->$key = $val;
+    foreach((array) $data as $key=>$val) if($val) $this->$key = $val;
     if($init) $this->init();
   }
   
