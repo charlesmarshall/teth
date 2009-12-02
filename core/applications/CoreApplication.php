@@ -59,7 +59,15 @@ class CoreApplication implements ApplicationInterface{
       foreach($mime as $value) header($value);
     }
   }
-
+  /**
+   * main function
+   * - runs the hooks & finds out the environment
+   * - figure out the routing map
+   * - make a new controller and tell it not to run the init
+   * - make a data array and call the template render function
+   * - call the headers function to output headers
+   * - echo & run post_exec hook
+   */
   public function exec(){
     $this->original_path = $_SERVER['REQUEST_URI'];
     
