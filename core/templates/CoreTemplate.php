@@ -40,7 +40,7 @@ class CoreTemplate implements TemplateInterface{
     ob_start();
     $page_data = (array) $this->data;
     extract($page_data);
-    include $this->indentifier;
+    if($this->indentifier) include $this->indentifier;
     return ob_get_clean();
   }
   
