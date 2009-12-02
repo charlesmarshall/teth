@@ -43,7 +43,11 @@ class CoreApplication implements ApplicationInterface{
     $this->router = new $router_class(Autoloader::$controllers, $parsed['path'], $_REQUEST);
     return $this->router->map();
   }
-  
+  /**
+   * - find the format from routing map & remove the . to get the file extension
+   * - as long as the headers have not been set and there are some config values for the file extension
+   *   then send that header out
+   */
   public function headers(){
     $format = $this->routing_map['format'];
     $ext = str_replace(".","", $format);
