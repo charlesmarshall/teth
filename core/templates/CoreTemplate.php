@@ -11,9 +11,7 @@ class CoreTemplate implements TemplateInterface{
     if($init) $this->init();
   }
   
-  public function init(){
-    echo self::render($this->data->original_path, $this->data);
-  }
+  public function init(){}
   
   public function indentifier(){
     $folders = Config::$settings['view_directories'];
