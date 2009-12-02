@@ -81,10 +81,10 @@ class CoreApplication implements ApplicationInterface{
     $data = array('routing_map'=>$this->routing_map, 'environment'=>$this->environment, 'is_layout'=>APP_DIR."view/layouts/");
     $this->content = CoreTemplate::render($controller->use_layout, $data);
     $this->headers();
-    echo $content;
     $this->post_exec();
+    echo $this->content;
   }
-  //save to cache?
+  //a good place to save $this->content to cache ..
   public function post_exec(){}
 
 }
