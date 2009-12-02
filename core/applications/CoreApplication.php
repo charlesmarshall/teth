@@ -53,7 +53,7 @@ class CoreApplication implements ApplicationInterface{
     $ext = str_replace(".","", $format);
     
     if(!headers_sent() && ($mime = Config::$settings['mime_headers'][$ext])){
-      foreach($mime as $index=>$value) if(is_numeric($index)) header($value);
+      foreach($mime as $value) header($value);
     }
   }
 
