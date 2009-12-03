@@ -52,10 +52,10 @@ class CoreTemplate implements TemplateInterface{
    */
   public function content(){
     $this->indentifier = $this->indentifier();
-    ob_start();
     $page_data = (array) $this->data;
     extract($page_data);
     if($this->indentifier){
+      ob_start();
       include $this->indentifier;    
       return ob_get_clean();
     }else return false;
