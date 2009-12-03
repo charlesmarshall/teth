@@ -16,30 +16,8 @@ class CoreController implements ControllerInterface{
    * pass in data to add to the controller
    * if init is true call the init function, replacement for controller global
    */
-  public function __construct($data, $init=true){   
+  public function __construct($data=false){
     foreach((array) $data as $key=>$val) if($val) $this->$key = $val;
-    if($init) $this->init();
   }
-  /**
-   * Empty hook function for rendering
-   */
-  protected function init(){}
-  /**
-   * main function - warning, templates are smart & recursive...
-   * - runs the correct action, this is set values etc
-   * - creates a template, passes itself along
-   * - call the content function directly
-   * - return the result
-   */
-  public function execute(){
-    //call the action
-    $this->{$this->action}();
-    
-    $template = new CoreTemplate($this);
-    $this->content = $template->content();
-    
-    return $this->content;
-  }
-  
 }
 ?>

@@ -70,26 +70,27 @@ class CoreTemplate implements TemplateInterface{
    *   - copy over router vars to data array
    *   - pass that data along to the controller
    * - if its not array return false
-   * - call the execute function on the controller
-   * - return its results
+   * - call the action method on the controller
+   * - return the content of the specific template
    */
   public static function render($path, $data = array()){
-    if(is_array($data)){
-      if($data['routing_map']){
-        $routing_map = $data['routing_map'];
-        unset($data['routing_map']);
-      }else{
-        $parsed = parse_url($path);
-        $router_class = Config::$settings['classes']['router']['class'];
-        $router = new $router_class(Autoloader::$controllers, $parsed['path']);
-        $routing_map = $router->map();
-      }
-      foreach($routing_map as $k=>$v) $data[$k] = $v;
-      unset($data['router']);
-      $controller_class = $data['controller'];
-      $controller = new $controller_class($data); 
-    }else return false; 
-    return $controller->execute();    
+    if(!is_array($data)) return false;
+    if($data['routing_map']){
+      $routing_map = $data['routing_map'];
+      unset($data['routing_map']);
+    }else{
+      $parsed = parse_url($path);
+      $router_class = Config::$settings['classes']['router']['class'];
+      $router = new $router_class(Autoloader::$controllers, $parsed['path']);
+      $routing_map = $router->map();
+    }
+    foreach($routing_map as $k=>$v) $data[$k] = $v;
+    unset($data['router']);
+    $controller_class = $data['controller'];
+    $controller = new $controller_class($data);
+    if(method_exists($controller,$controller->action)) $controller->{$controller->action}();
+    $template = new CoreTemplate($controller);
+    return $template->content();
   }
 }
 ?>
