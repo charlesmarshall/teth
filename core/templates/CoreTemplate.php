@@ -51,10 +51,8 @@ class CoreTemplate implements TemplateInterface{
    *  - as buffering is turned on clean and return the result
    */
   public function content(){
-    $this->indentifier = $this->indentifier();
-    $page_data = (array) $this->data;
-    extract($page_data);
-    if($this->indentifier){
+    if($this->indentifier = $this->indentifier()){
+      extract((array) $this->data);
       ob_start();
       include $this->indentifier;    
       return ob_get_clean();
