@@ -64,32 +64,32 @@ class CoreTemplate implements TemplateInterface{
    * static render function to handle partials, views, layouts etc
    * - path is string representing url to render, so "/" or "page/_contact"
    * - the data param needs to be an array
+   * - if mapping data is set the just grab the values
+   *   - copy data over
+   *   - pass it in to controller
    * - if no routing data is passed in then call the router
    *   - use the router to find controller etc
    *   - copy over router vars to data array
    *   - pass that data along to the controller
-   * - if mapping data is set the just grab the values
-   *   - copy data over
-   *   - pass it in to controller
    * - if its not array return false
    * - call the execute function on the controller
    * - return its results
    */
   public static function render($path, $data = array()){
-    if(is_array($data) && !$data['routing_map']){      
-      $parsed = parse_url($path);
-      $router_class = Config::$settings['classes']['router']['class'];
-      $router = new $router_class(Autoloader::$controllers, $parsed['path']);
-      $routing_map = $router->map();      
-      foreach($routing_map as $k=>$v) $data[$k] = $v;              
+    if(is_array($data)){
+      if($data['routing_map']){
+        $routing_map = $data['routing_map'];
+        unset($data['routing_map']);
+      }else{
+        $parsed = parse_url($path);
+        $router_class = Config::$settings['classes']['router']['class'];
+        $router = new $router_class(Autoloader::$controllers, $parsed['path']);
+        $routing_map = $router->map();
+      }
+      foreach($routing_map as $k=>$v) $data[$k] = $v;
       unset($data['router']);
       $controller_class = $data['controller'];
       $controller = new $controller_class($data); 
-    }elseif(is_array($data) && $data['routing_map']){
-      foreach($data['routing_map'] as $k=>$v) $data[$k] = $v;
-      unset($data['router'], $data['routing_map']);
-      $controller_class = $data['controller'];
-      $controller = new $controller_class($data);
     }else return false; 
     return $controller->execute();    
   }
