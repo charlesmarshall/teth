@@ -3,10 +3,10 @@ class CoreException extends Exception{
   public $status = 500;
   public $message = "Application Error";
   
-  public function __construct($message="", $status=0, $trace=true) {
-    if(!$conf = Config::$settings['error_pages'][$this->status]) $conf = Config::$settings['error_pages']['generic'];
-    if($status) $this->status = $status;
+  public function __construct($message="", $status=false, $trace=true) {
+    if($status !== false) $this->status = $status;
     if($message) $this->message = $message;
+    if(!$conf = Config::$settings['error_pages'][$this->status]) $conf = Config::$settings['error_pages']['generic'];
     
     $path = $conf['path'].$conf['file'].$conf['suffix'];
 
