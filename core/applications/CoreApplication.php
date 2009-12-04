@@ -77,9 +77,9 @@ class CoreApplication implements ApplicationInterface{
     $this->setup();
     
     $controller = new $this->routing_map['controller'];
-    //data for the template - this way treats it as a layout and not a view/partial .. would be nice if they were all the same
-    $data = array('routing_map'=>$this->routing_map, 'environment'=>$this->environment, 'is_layout'=>APP_DIR."view/layouts/");
-    $this->content = CoreTemplate::render($controller->use_layout, $data);
+    //data for the template
+    $data = array('environment'=>$this->environment, 'original_path'=>$this->original_path);
+    $this->content = CoreTemplate::render($controller->intial_view, $data);
     $this->headers();
     $this->post_exec();
     echo $this->content;

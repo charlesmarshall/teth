@@ -9,8 +9,15 @@ class CoreController implements ControllerInterface{
   public $action=false;
   public $uid=false;
   public $format=false;
-  //file name of the layout to be rendered
-  public $use_layout="application";
+
+  /**
+   * initial view to be rendered before other views
+   * this view will be triggered by CoreApplication
+   * $this->original_path will be set to the original url the application was triggered with
+   * normal behaviour is to call a render on that var inside the initial_view
+   */
+  public $intial_view="application";  
+  public function application(){}
   
   /**
    * pass in data to add to the controller

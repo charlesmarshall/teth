@@ -81,7 +81,7 @@ Config::$settings['position_map']=false;
  */
 Config::$settings['default_format']=".html";
 /**
- * An array of locations to look for layouts and views
+ * An array of locations to look for views
  */
 Config::$settings['view_directories'] = array(APP_DIR."view/");
 /**

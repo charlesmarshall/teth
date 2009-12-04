@@ -28,11 +28,8 @@ class CoreTemplate implements TemplateInterface{
     $parts = preg_split($pattern, str_replace("Controller", "", $config['controller']));
     //loop over and make an array of places to look in
     foreach($parts as $part) $base.= $folders[] = $base.strtolower($part)."/";
-    //if this is a layout then add the layout directory to the list of places to look & set the filename
-    if($config['is_layout']){
-      $folders = array_merge((array) $config['is_layout'], $folders); 
-      $file = $config['use_layout'].$config['format'];
-    }else $file = $config['action'].$config['format'];
+    //set the filename based on the action
+    $file = $config['action'].$config['format'];
     
     $indentifier = false;
     //clever reverse search (so most specific first) for a readable file that matches the file name
@@ -59,7 +56,7 @@ class CoreTemplate implements TemplateInterface{
     }else return false;
   }
   /**
-   * static render function to handle partials, views, layouts etc
+   * static render function to handle rendering of views
    * - path is string representing url to render, so "/" or "page/_contact"
    * - the data param needs to be an array
    * - if mapping data is set the just grab the values
