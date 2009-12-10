@@ -9,9 +9,10 @@ class CoreException extends Exception{
     if(!$conf = Config::$settings['error_pages'][$this->status]) $conf = Config::$settings['error_pages']['generic'];
     
     $path = $conf['path'].$conf['file'].$conf['suffix'];
-
-    header('HTTP/1.1 '.$this->status.' '.$this->message,1,$this->status);
-    header('Status '.$this->status);
+    if(!headers_sent()){
+      header('HTTP/1.1 '.$this->status.' '.$this->message,1,$this->status);
+      header('Status '.$this->status);
+    }
     ob_end_clean();
     if(is_readable($path)) echo file_get_contents($path);
     else echo $message;
