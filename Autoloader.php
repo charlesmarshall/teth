@@ -99,6 +99,7 @@ Config::$settings['mime_headers'] = array(
  * Main auto load call
  */
 function __autoload($classname) {
+  $classname = basename($classname, ".php");  
   Autoloader::load($classname);
 }
 
