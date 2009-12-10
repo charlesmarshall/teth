@@ -243,7 +243,7 @@ class Autoloader{
     if(!Autoloader::$loaded[$classname] && Autoloader::$classes[$classname]){
       Autoloader::$loaded[$classname] = Autoloader::$classes[$classname];
       if(is_readable(Autoloader::$classes[$classname])) include Autoloader::$classes[$classname];
-    }else if($config_key = Autoloader::class_in_config($classname)){
+    }else if(!Autoloader::$loaded[$classname] && ($config_key = Autoloader::class_in_config($classname))){
       Autoloader::$loaded[$classname] = Autoloader::$classes[$classname] = Autoloader::path_to($config_key);
       if(is_readable(Autoloader::$classes[$classname])) include Autoloader::$classes[$classname];
     }else if(!Autoloader::$classes[$classname]){
