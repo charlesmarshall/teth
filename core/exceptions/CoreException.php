@@ -15,7 +15,7 @@ class CoreException extends Exception{
     ob_end_clean();
     if(is_readable($path)) echo file_get_contents($path);
     else echo $message;
-    if($trace) echo "file: ".$this->getFile()."<br />line: ".$this->getLine()."<br />trace:<pre>".$this->getTraceAsString()."</pre>";
+    if($trace) echo "file: ".$this->getFile()."<br />\nline: ".$this->getLine()."<br />\ntrace:<pre>\n".$this->getTraceAsString()."\n</pre>\n\n";
     exit;
   }
   
