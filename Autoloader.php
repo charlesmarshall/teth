@@ -277,8 +277,7 @@ class Autoloader{
       Autoloader::register_classes(array(SITE_DIR));
       $all_controllers = Autoloader::fetch_controllers();
     }
-
-    $run = new $application($all_controllers, true);
+    $run = new $application(true);
   }
   
 }
