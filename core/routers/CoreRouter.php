@@ -43,12 +43,13 @@ class CoreRouter implements RouterInterface{
     //take a slice from the first part of the controller
     $chunk = array_slice($split,$controller_pos[0]);
     //var for class name
-    $controller=false;
+    $controller_url=$controller="";
     //string for all of it
     $cumlative="";
     $depth=0;
     // while not found a controller and still stuff to check, loop over 
     while(($check = array_shift($chunk)) && !$controller){
+      $controller_url.=$check."/";
       //amend the strings ready for checking
       $cumlative .= $check = str_replace(" ", "_", ucwords(str_replace("_", " ", $check)));
       //check for current level first
@@ -60,6 +61,7 @@ class CoreRouter implements RouterInterface{
     //if the controller was found 
     if($controller){
       $this->mapped['controller'] = $controller;
+      $this->mapped['controller_url'] = rtrim($controller_url,"/");
       array_splice($split, $controller_pos[0],$depth);
     }
     //reorder the position map

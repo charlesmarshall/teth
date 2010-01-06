@@ -76,10 +76,11 @@ class CoreApplication implements ApplicationInterface{
     $this->routing_map = $this->route();
     $this->setup();
     
-    $controller = new $this->routing_map['controller'];
+    $controller = new $this->routing_map['controller'](false);
+    $controller_url = $this->routing_map['controller_url'];
     //data for the template
     $data = array('environment'=>$this->environment, 'original_path'=>$this->original_path);
-    $this->content = CoreTemplate::render($controller->intial_view, $data);
+    $this->content = CoreTemplate::render($controller_url."/".$controller->intial_view, $data);
     $this->headers();
     $this->post_exec();
     echo $this->content;
