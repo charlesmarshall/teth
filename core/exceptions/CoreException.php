@@ -14,9 +14,9 @@ class CoreException extends Exception{
       header('Status '.$this->status);
     }
     ob_end_clean();
-    if(is_readable($path)) echo file_get_contents($path);
-    else echo $message;
-    if($trace) echo "file: ".$this->getFile()."<br />\nline: ".$this->getLine()."<br />\ntrace:<pre>\n".$this->getTraceAsString()."\n</pre>\n\n";
+    if($trace) $stack_trace = "file: ".$this->getFile()."<br />\nline: ".$this->getLine()."<br />\ntrace:<pre>\n".$this->getTraceAsString()."\n</pre>\n\n";
+    if(is_readable($path)) $message = str_ireplace("<!--TRACE-->", $stack_trace, str_replace('<!--MESSAGE-->', $message, file_get_contents($path)));
+    echo $message;    
     exit;
   }
   
