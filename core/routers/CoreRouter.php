@@ -49,6 +49,7 @@ class CoreRouter implements RouterInterface{
     $depth=0;
     // while not found a controller and still stuff to check, loop over 
     while(($check = array_shift($chunk)) && !$controller){
+      //record the url path that is being taken, so no need to try an reverse it from the controller class etc
       $controller_url.=$check."/";
       //amend the strings ready for checking
       $cumlative .= $check = str_replace(" ", "_", ucwords(str_replace("_", " ", $check)));
@@ -61,7 +62,8 @@ class CoreRouter implements RouterInterface{
     //if the controller was found 
     if($controller){
       $this->mapped['controller'] = $controller;
-      $this->mapped['controller_url'] = rtrim($controller_url,"/");
+      //map the url that trigged the controller
+      $this->mapped['controller_url'] = rtrim($controller_url,"/"); 
       array_splice($split, $controller_pos[0],$depth);
     }
     //reorder the position map
