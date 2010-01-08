@@ -113,7 +113,7 @@ class CoreRouter implements RouterInterface{
 
   
   public function format($check){
-    if(strlen($check) && ($pos = strrpos($check,".") ) ) return substr($check,$pos);
+    if(strlen($check) && ($pos = strrpos($check,".") ) && ($pos < strlen($check)-1) ) return substr($check,$pos);
     else return Config::$settings['default_format'];
   }
 
