@@ -11,6 +11,14 @@ class CoreRouter implements RouterInterface{
   public $requested_url=false;
   public $request_data=array();
   public $post=array();
+  /**
+   * - this might seem weird, but here for a good reason 
+   * added this static var so it can be passed along to a missing view exception
+   * this way if the missing view is the main requested url the application will
+   * should throw a 404, otherwise a 50x
+   * that allows for 404s to kill the application where a 50x will log and carry on
+   */
+  public static $requested_path=false;
 
   public function __construct($controllers, $path, $request=array()){
     $this->controllers = $controllers;
