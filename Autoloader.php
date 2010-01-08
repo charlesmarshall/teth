@@ -31,10 +31,9 @@ Config::$settings['classes']['ini_directory_iterator']        = array('class'=>'
 /**
  * Exceptions
  */
-Config::$settings['exceptions']['missing_class']  = array('class'=>'CoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
-Config::$settings['exceptions']['page_not_found'] = array('class'=>'CoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
 Config::$settings['exceptions']['missing_class']    = array('class'=>'CoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
 Config::$settings['exceptions']['action_not_found'] = array('class'=>'CoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
+Config::$settings['exceptions']['view_not_found']   = array('class'=>'CoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
 /**
  * Config files
  */
