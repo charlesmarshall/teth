@@ -68,7 +68,10 @@ class CoreTemplate implements TemplateInterface{
    *   - pass that data along to the controller
    * - if its not array return false
    * - call the action method on the controller
-   * - return the content of the specific template
+   * - if the content isn't returned (view file not there)
+   *   - fetch the config var to see if should be a fatal error
+   *   - if it is then thrown view_not_found config exception
+   * - return content
    */
   public static function render($path, $data = array()){
     if(!is_array($data)) return false;
@@ -87,7 +90,14 @@ class CoreTemplate implements TemplateInterface{
     $controller = new $controller_class($data);
     if(method_exists($controller,$controller->action)) $controller->{$controller->action}();
     $template = new CoreTemplate($controller);
-    return $template->content();
+    
+    if(!$content = $template->content()){
+      if($path == CoreRouter::$requested_path) $die = Config::$settings['config']['die_on']['missing_original_view'];
+      else $die = Config::$settings['config']['die_on']['missing_other_views'];
+      if($die) throw new Config::$settings['exceptions']['view_not_found']['class']("View not found", 404);
+      else error_log('[TEMPLATE - RENDER] Not found - '.$path);
+    }
+    return $content;
   }
 }
 ?>
