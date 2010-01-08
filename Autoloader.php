@@ -37,7 +37,8 @@ Config::$settings['exceptions']['view_not_found']   = array('class'=>'CoreExcept
 /**
  * Config files
  */
-Config::$settings['config']['application'] = array('file'=>'config', 'suffix'=>'.php', 'path'=>CONFIG_DIR);
+Config::$settings['config']['application']  = array('file'=>'config', 'suffix'=>'.php', 'path'=>CONFIG_DIR);
+Config::$settings['config']['die_on']       = array('missing_original_view'=>true, 'missing_other_views'=>false);
 /**
  * Preset error pages
  */
