@@ -157,12 +157,14 @@ class Autoloader{
    * read in ini files
    */
   public static function pre_init_hooks(){
-    foreach(Config::$settings['pre_functions'] as $path=>$classes){
-      include $path;
-      foreach($classes as $class=>$functions){
-        $obj = new $class;
-        foreach($functions as $func) $obj->$func();       
-      }      
+    foreach((array)Config::$settings['pre_functions'] as $path=>$classes){
+      if(is_readable($path)){
+        include $path;
+        foreach($classes as $class=>$functions){
+          $obj = new $class;
+          foreach($functions as $func) $obj->$func();       
+        }
+      }
     }
   }
   /**
