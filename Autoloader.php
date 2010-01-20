@@ -159,7 +159,7 @@ class Autoloader{
   public static function pre_init_hooks(){
     foreach((array)Config::$settings['pre_functions'] as $path=>$classes){
       if(is_readable($path)){
-        include $path;
+        include_once $path;
         foreach($classes as $class=>$functions){
           $obj = new $class;
           foreach($functions as $func) $obj->$func();       
