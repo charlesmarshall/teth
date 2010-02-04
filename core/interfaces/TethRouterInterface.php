@@ -1,5 +1,5 @@
 <?
-interface RouterInterface{
+interface TethRouterInterface{
   public function map();
 }
 ?>

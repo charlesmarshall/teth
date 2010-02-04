@@ -3,7 +3,7 @@
  * The base level template .. runs the static render function 
  *
  */
-class TethCoreTemplate implements TemplateInterface{
+class TethCoreTemplate implements TethTemplateInterface{
   
   public $data=false; //data passed in for rendering
   public $indentifier=false; //the file to render

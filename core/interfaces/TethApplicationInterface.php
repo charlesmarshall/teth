@@ -1,5 +1,5 @@
 <?
-interface ApplicationInterface{
+interface TethApplicationInterface{
   //called first & calls all others
   public function exec();
   //hook- first thing called in the exec

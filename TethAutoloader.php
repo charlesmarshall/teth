@@ -26,8 +26,8 @@ class Config{
 Config::$settings['classes']['autoloader']                    = array('class'=>'TethAutoloader');
 Config::$settings['classes']['application']                   = array('class'=>'TethCoreApplication', 'component'=>'core', 'module'=>'applications');
 Config::$settings['classes']['router']                        = array('class'=>'TethCoreRouter', 'component'=>'core', 'module'=>'routers');
-Config::$settings['classes']['recursive_directory_iterator']  = array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
-Config::$settings['classes']['ini_directory_iterator']        = array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
+Config::$settings['classes']['recursive_directory_iterator']  = array('class'=>'TethRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
+Config::$settings['classes']['ini_directory_iterator']        = array('class'=>'TethRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
 /**
  * Exceptions
  */
@@ -53,7 +53,7 @@ Config::$settings['listings'] = array(FRAMEWORK_DIR);
 /**
  * name of ini files
  */
-Config::$settings['ini_file'] = "ini.php";
+Config::$settings['ini_file'] = "teth_ini.php";
 /**
  * static array for pre init hooks, so actions such as cache can be bypass loading
  * - takes form of:
@@ -177,7 +177,7 @@ class TethAutoloader{
     TethAutoloader::register_classes();
   }
   /**
-   * scan over the directories and look for ini.php files
+   * scan over the directories and look for teth_ini.php files
    *
    */
   public static function register_inis(){

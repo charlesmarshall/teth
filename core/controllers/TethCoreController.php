@@ -2,7 +2,7 @@
 /**
  * Base controller  
  */
-class TethCoreController implements ControllerInterface{
+class TethCoreController implements TethControllerInterface{
   
   //default route items
   public $controller=false;
