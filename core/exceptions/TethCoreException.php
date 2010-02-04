@@ -1,5 +1,5 @@
 <?
-class CoreException extends Exception{  
+class TethCoreException extends Exception{  
   public $status = 500;
   public $message = "Application Error";
   
