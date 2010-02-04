@@ -24,16 +24,16 @@ class Config{
  * List of default classes for main things
  */
 Config::$settings['classes']['autoloader']                    = array('class'=>'TethAutoloader');
-Config::$settings['classes']['application']                   = array('class'=>'TethCoreApplication', 'component'=>'core', 'module'=>'applications');
+Config::$settings['classes']['application']                   = array('class'=>'CoreApplication', 'component'=>'core', 'module'=>'applications');
 Config::$settings['classes']['router']                        = array('class'=>'TethCoreRouter', 'component'=>'core', 'module'=>'routers');
 Config::$settings['classes']['recursive_directory_iterator']  = array('class'=>'TethRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
 Config::$settings['classes']['ini_directory_iterator']        = array('class'=>'TethRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
 /**
  * Exceptions
  */
-Config::$settings['exceptions']['missing_class']    = array('class'=>'CoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
-Config::$settings['exceptions']['action_not_found'] = array('class'=>'CoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
-Config::$settings['exceptions']['view_not_found']   = array('class'=>'CoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
+Config::$settings['exceptions']['missing_class']    = array('class'=>'TethCoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
+Config::$settings['exceptions']['action_not_found'] = array('class'=>'TethCoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
+Config::$settings['exceptions']['view_not_found']   = array('class'=>'TethCoreException', 'component'=>'core', 'module'=>'exceptions', 'base'=>FRAMEWORK_DIR);
 /**
  * Config files
  */
