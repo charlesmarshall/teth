@@ -2,7 +2,7 @@
 /**
  * Skel file that doesn't do much, just calls other things
  */
-class CoreApplication implements TethApplicationInterface{
+class TethCoreApplication implements TethApplicationInterface{
   //Default the env to development
   public $environment = "development";
   //the route to call

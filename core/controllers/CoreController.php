@@ -12,7 +12,7 @@ class CoreController implements TethControllerInterface{
 
   /**
    * initial view to be rendered before other views
-   * this view will be triggered by CoreApplication
+   * this view will be triggered by TethCoreApplication
    * $this->original_path will be set to the original url the application was triggered with
    * normal behaviour is to call a render on that var inside the initial_view
    */
