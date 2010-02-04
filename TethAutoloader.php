@@ -53,7 +53,7 @@ Config::$settings['listings'] = array(FRAMEWORK_DIR);
 /**
  * name of ini files
  */
-Config::$settings['ini_file'] = "ini.php";
+Config::$settings['ini_file'] = "teth_ini.php";
 /**
  * static array for pre init hooks, so actions such as cache can be bypass loading
  * - takes form of:
@@ -177,7 +177,7 @@ class TethAutoloader{
     TethAutoloader::register_classes();
   }
   /**
-   * scan over the directories and look for ini.php files
+   * scan over the directories and look for teth_ini.php files
    *
    */
   public static function register_inis(){
