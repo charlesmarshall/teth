@@ -3,7 +3,7 @@
  * Default stuff happens in here
  * - register this component 
  */
-Autoloader::add_component("core");
+TethAutoloader::add_component("core");
 
 /**
  * Changing a default class

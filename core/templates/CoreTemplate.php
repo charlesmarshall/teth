@@ -81,7 +81,7 @@ class CoreTemplate implements TemplateInterface{
     }else{
       $parsed = parse_url($path);
       $router_class = Config::$settings['classes']['router']['class'];
-      $router = new $router_class(Autoloader::$controllers, $parsed['path']);
+      $router = new $router_class(TethAutoloader::$controllers, $parsed['path']);
       $routing_map = $router->map();
     }
     foreach($routing_map as $k=>$v) $data[$k] = $v;

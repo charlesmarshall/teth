@@ -43,7 +43,7 @@ class CoreApplication implements ApplicationInterface{
     $parsed = parse_url($this->original_path);
     //figure out the routing
     $router_class = Config::$settings['classes']['router']['class'];
-    $this->router = new $router_class(Autoloader::$controllers, $parsed['path'], $_REQUEST);
+    $this->router = new $router_class(TethAutoloader::$controllers, $parsed['path'], $_REQUEST);
     return $this->router->map();
   }
   /**
