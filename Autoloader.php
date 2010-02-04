@@ -106,15 +106,15 @@ function __autoload($classname) {
 
 /**
  * load in all the assets needed for the framework bit by bit
- * 
+ *
  */
 class Autoloader{
 
   /**
    * array containing all top level modules
    */
-  public static $components = array();  
-  
+  public static $components = array();
+
   public static $classes = array();
   public static $loaded = array();
   public static $controllers = array();
@@ -122,7 +122,7 @@ class Autoloader{
   /**
    * Work out the correct file path to use from the config file
    */
-  public static function path_to($type, $segment='classes'){    
+  public static function path_to($type, $segment='classes'){
     $conf = Config::$settings[$segment];
     if(!is_array($conf[$type]) || !$conf[$type]['class']) return false;
     if(!$suffix = $conf[$type]['suffix']) $suffix=".php";
@@ -149,11 +149,11 @@ class Autoloader{
     }
     return false;
   }
- 
+
   /**
-   * Run over the pre init hooks - cache would a good one 
-   * 
-   * Mainly written so when including a cache component you can bypass loading of most of framework; this point you have only 
+   * Run over the pre init hooks - cache would a good one
+   *
+   * Mainly written so when including a cache component you can bypass loading of most of framework; this point you have only
    * read in ini files
    */
   public static function pre_init_hooks(){
@@ -162,7 +162,7 @@ class Autoloader{
         include_once $path;
         foreach($classes as $class=>$functions){
           $obj = new $class;
-          foreach($functions as $func) $obj->$func();       
+          foreach($functions as $func) $obj->$func();
         }
       }
     }
@@ -177,13 +177,13 @@ class Autoloader{
     Autoloader::register_classes();
   }
   /**
-   * scan over the directories and look for ini.php files 
-   * 
+   * scan over the directories and look for ini.php files
+   *
    */
   public static function register_inis(){
     $iterator_class = Autoloader::class_for('ini_directory_iterator');
     if(!Autoloader::$loaded[$iterator_class]) Autoloader::load($iterator_class);
-            
+
     $scan = array_reverse(Config::$settings['listings']); //so newer added directories have priority
     foreach($scan as $dir){
       //iterator
@@ -195,12 +195,12 @@ class Autoloader{
         if($name == Config::$settings['ini_file'] && is_readable($path) ){
           $dirname = dirname($path);
           include $path;
-          $compname = substr($dirname, strrpos($dirname, "/")+1);          
-          if(!Autoloader::$components[$compname]) Autoloader::add_component($compname, str_replace("/".$compname, "", $dirname));          
+          $compname = substr($dirname, strrpos($dirname, "/")+1);
+          if(!Autoloader::$components[$compname]) Autoloader::add_component($compname, str_replace("/".$compname, "", $dirname));
         }
       }
-    } 
-    
+    }
+
   }
   /**
    * Recursively find all files and load them in to an array
@@ -215,15 +215,15 @@ class Autoloader{
       //recursive loop
       $recurse = new RecursiveIteratorIterator(new $iterator_class($dir), true);
       /**
-       * Loop over all the files in the directory..  
+       * Loop over all the files in the directory..
        * - include them if its a php file, not an ini file & has not been loaded to classes array already
        */
-      foreach($recurse as $file){        
+      foreach($recurse as $file){
         $basename = basename($file);
         $classname = str_replace(".php","",$basename);
         if(strstr($file, ".php") && !Autoloader::$classes[$classname] && $basename != Config::$settings['ini_file'] && !in_array($basename, Autoloader::$excluded) ) Autoloader::$classes[$classname] = $file->getPathName();
       }
-    }    
+    }
   }
   /**
    * Add components to be registered in the here
@@ -239,7 +239,7 @@ class Autoloader{
     unset(Autoloader::$components[$component_name]);
   }
   /**
-   * Load classes in 
+   * Load classes in
    * - use a loaded array to avoid overhead of include_once
    */
   public static function load($classname){
@@ -267,23 +267,23 @@ class Autoloader{
     return $found;
   }
   /**
-   * Load the application class if it hasn't been 
+   * Load the application class if it hasn't been
    * Load the config file
    */
-  public static function go(){    
+  public static function go(){
     $all_controllers = array();
     $application = Autoloader::class_for('application');
-    if(!Autoloader::$loaded[$application]) Autoloader::load($application);    
+    if(!Autoloader::$loaded[$application]) Autoloader::load($application);
     if(defined('SITE_NAME')){
       $configs = $config = Config::$settings['config'];
       foreach($configs as $conf) if(is_readable($conf['path'].$conf['file'].$conf['suffix']) ) include $conf['path'].$conf['file'].$conf['suffix'];
-      Autoloader::add_component(SITE_NAME, SITE_DIR);  
+      Autoloader::add_component(SITE_NAME, SITE_DIR);
       Autoloader::register_classes(array(SITE_DIR));
       $all_controllers = Autoloader::fetch_controllers();
     }
     $run = new $application(true);
   }
-  
+
 }
 
 ?>
