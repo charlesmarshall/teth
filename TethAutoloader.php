@@ -23,7 +23,7 @@ class Config{
 /**
  * List of default classes for main things
  */
-Config::$settings['classes']['autoloader']                    = array('class'=>'Autoloader');
+Config::$settings['classes']['autoloader']                    = array('class'=>'TethAutoloader');
 Config::$settings['classes']['application']                   = array('class'=>'CoreApplication', 'component'=>'core', 'module'=>'applications');
 Config::$settings['classes']['router']                        = array('class'=>'CoreRouter', 'component'=>'core', 'module'=>'routers');
 Config::$settings['classes']['recursive_directory_iterator']  = array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
@@ -101,14 +101,14 @@ Config::$settings['mime_headers'] = array(
  * Main auto load call
  */
 function __autoload($classname) {
-  Autoloader::load($classname);
+  TethAutoloader::load($classname);
 }
 
 /**
  * load in all the assets needed for the framework bit by bit
  *
  */
-class Autoloader{
+class TethAutoloader{
 
   /**
    * array containing all top level modules
@@ -171,18 +171,18 @@ class Autoloader{
    * main function that reads a bunch of stuff in
    */
   public static function init(){
-    Autoloader::$loaded['Autoloader'] = Autoloader::path_to('autoloader');
-    Autoloader::register_inis();
-    Autoloader::pre_init_hooks();
-    Autoloader::register_classes();
+    TethAutoloader::$loaded['Autoloader'] = TethAutoloader::path_to('autoloader');
+    TethAutoloader::register_inis();
+    TethAutoloader::pre_init_hooks();
+    TethAutoloader::register_classes();
   }
   /**
    * scan over the directories and look for ini.php files
    *
    */
   public static function register_inis(){
-    $iterator_class = Autoloader::class_for('ini_directory_iterator');
-    if(!Autoloader::$loaded[$iterator_class]) Autoloader::load($iterator_class);
+    $iterator_class = TethAutoloader::class_for('ini_directory_iterator');
+    if(!TethAutoloader::$loaded[$iterator_class]) TethAutoloader::load($iterator_class);
 
     $scan = array_reverse(Config::$settings['listings']); //so newer added directories have priority
     foreach($scan as $dir){
@@ -196,7 +196,7 @@ class Autoloader{
           $dirname = dirname($path);
           include $path;
           $compname = substr($dirname, strrpos($dirname, "/")+1);
-          if(!Autoloader::$components[$compname]) Autoloader::add_component($compname, str_replace("/".$compname, "", $dirname));
+          if(!TethAutoloader::$components[$compname]) TethAutoloader::add_component($compname, str_replace("/".$compname, "", $dirname));
         }
       }
     }
@@ -206,11 +206,11 @@ class Autoloader{
    * Recursively find all files and load them in to an array
    */
   public static function register_classes($scan=false){
-    $iterator_class = Autoloader::class_for('recursive_directory_iterator');
+    $iterator_class = TethAutoloader::class_for('recursive_directory_iterator');
     //load in the interator
-    if(!Autoloader::$loaded[$iterator_class]) Autoloader::load($iterator_class);
-    //include all the classes found within the Autoloader::$listing folders
-    if(!$scan) $scan = array_reverse(Autoloader::$components);
+    if(!TethAutoloader::$loaded[$iterator_class]) TethAutoloader::load($iterator_class);
+    //include all the classes found within the TethAutoloader::$listing folders
+    if(!$scan) $scan = array_reverse(TethAutoloader::$components);
     foreach($scan as $dir){
       //recursive loop
       $recurse = new RecursiveIteratorIterator(new $iterator_class($dir), true);
@@ -221,7 +221,7 @@ class Autoloader{
       foreach($recurse as $file){
         $basename = basename($file);
         $classname = str_replace(".php","",$basename);
-        if(strstr($file, ".php") && !Autoloader::$classes[$classname] && $basename != Config::$settings['ini_file'] && !in_array($basename, Autoloader::$excluded) ) Autoloader::$classes[$classname] = $file->getPathName();
+        if(strstr($file, ".php") && !TethAutoloader::$classes[$classname] && $basename != Config::$settings['ini_file'] && !in_array($basename, TethAutoloader::$excluded) ) TethAutoloader::$classes[$classname] = $file->getPathName();
       }
     }
   }
@@ -230,28 +230,28 @@ class Autoloader{
    */
   public static function add_component($component_name, $dir=false){
     if(!$dir) $dir=FRAMEWORK_DIR;
-    Autoloader::$components[$component_name] = $dir . $component_name;
+    TethAutoloader::$components[$component_name] = $dir . $component_name;
   }
   /**
    * remove a component
    */
   public static function remove_component($component_name){
-    unset(Autoloader::$components[$component_name]);
+    unset(TethAutoloader::$components[$component_name]);
   }
   /**
    * Load classes in
    * - use a loaded array to avoid overhead of include_once
    */
   public static function load($classname){
-    if(!Autoloader::$loaded[$classname] && Autoloader::$classes[$classname]){
-      Autoloader::$loaded[$classname] = Autoloader::$classes[$classname];
-      if(is_readable(Autoloader::$classes[$classname])) include Autoloader::$classes[$classname];
-    }else if(!Autoloader::$loaded[$classname] && ($config_key = Autoloader::class_in_config($classname))){
-      Autoloader::$loaded[$classname] = Autoloader::$classes[$classname] = Autoloader::path_to($config_key);
-      if(is_readable(Autoloader::$classes[$classname])) include Autoloader::$classes[$classname];
-    }else if(!Autoloader::$classes[$classname]){
-      $exception_class = Autoloader::class_for('missing_class', 'exceptions');
-      $exception_path = Autoloader::path_to('missing_class', 'exceptions');
+    if(!TethAutoloader::$loaded[$classname] && TethAutoloader::$classes[$classname]){
+      TethAutoloader::$loaded[$classname] = TethAutoloader::$classes[$classname];
+      if(is_readable(TethAutoloader::$classes[$classname])) include TethAutoloader::$classes[$classname];
+    }else if(!TethAutoloader::$loaded[$classname] && ($config_key = TethAutoloader::class_in_config($classname))){
+      TethAutoloader::$loaded[$classname] = TethAutoloader::$classes[$classname] = TethAutoloader::path_to($config_key);
+      if(is_readable(TethAutoloader::$classes[$classname])) include TethAutoloader::$classes[$classname];
+    }else if(!TethAutoloader::$classes[$classname]){
+      $exception_class = TethAutoloader::class_for('missing_class', 'exceptions');
+      $exception_path = TethAutoloader::path_to('missing_class', 'exceptions');
       if($exception_path) include_once $exception_path;
       if($exception_class) throw new $exception_class("CLASS NOT FOUND - $classname");
     }
@@ -261,8 +261,8 @@ class Autoloader{
    */
   public static function fetch_controllers(){
     $found = array();
-    foreach(Autoloader::$classes as $class=>$path) if(strstr($path, CONTROLLER_DIR)) $found[$class] = $path;
-    Autoloader::$controllers = $found;
+    foreach(TethAutoloader::$classes as $class=>$path) if(strstr($path, CONTROLLER_DIR)) $found[$class] = $path;
+    TethAutoloader::$controllers = $found;
     return $found;
   }
   /**
@@ -271,14 +271,14 @@ class Autoloader{
    */
   public static function go(){
     $all_controllers = array();
-    $application = Autoloader::class_for('application');
-    if(!Autoloader::$loaded[$application]) Autoloader::load($application);
+    $application = TethAutoloader::class_for('application');
+    if(!TethAutoloader::$loaded[$application]) TethAutoloader::load($application);
     if(defined('SITE_NAME')){
       $configs = $config = Config::$settings['config'];
       foreach($configs as $conf) if(is_readable($conf['path'].$conf['file'].$conf['suffix']) ) include $conf['path'].$conf['file'].$conf['suffix'];
-      Autoloader::add_component(SITE_NAME, SITE_DIR);
-      Autoloader::register_classes(array(SITE_DIR));
-      $all_controllers = Autoloader::fetch_controllers();
+      TethAutoloader::add_component(SITE_NAME, SITE_DIR);
+      TethAutoloader::register_classes(array(SITE_DIR));
+      $all_controllers = TethAutoloader::fetch_controllers();
     }
     $run = new $application(true);
   }
