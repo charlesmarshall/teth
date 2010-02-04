@@ -3,7 +3,7 @@
  * The base level template .. runs the static render function 
  *
  */
-class CoreTemplate implements TemplateInterface{
+class TethCoreTemplate implements TemplateInterface{
   
   public $data=false; //data passed in for rendering
   public $indentifier=false; //the file to render
@@ -89,7 +89,7 @@ class CoreTemplate implements TemplateInterface{
     $controller_class = $data['controller'];
     $controller = new $controller_class($data);
     if(method_exists($controller,$controller->action)) $controller->{$controller->action}();
-    $template = new CoreTemplate($controller);
+    $template = new TethCoreTemplate($controller);
     
     if(!$content = $template->content()){
       if($path == CoreRouter::$requested_path) $die = Config::$settings['config']['die_on']['missing_original_view'];

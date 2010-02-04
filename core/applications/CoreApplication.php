@@ -82,7 +82,7 @@ class CoreApplication implements ApplicationInterface{
     //data for the template
     $data = array('environment'=>$this->environment, 'original_path'=>$this->original_path);
     CoreRouter::$requested_path = $this->original_path;
-    $this->content = CoreTemplate::render($controller_url."/".$controller->intial_view.$format, $data);
+    $this->content = TethCoreTemplate::render($controller_url."/".$controller->intial_view.$format, $data);
     $this->headers();
     $this->post_exec();
     echo $this->content;
