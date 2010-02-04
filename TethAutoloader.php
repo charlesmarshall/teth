@@ -25,7 +25,7 @@ class Config{
  */
 Config::$settings['classes']['autoloader']                    = array('class'=>'TethAutoloader');
 Config::$settings['classes']['application']                   = array('class'=>'TethCoreApplication', 'component'=>'core', 'module'=>'applications');
-Config::$settings['classes']['router']                        = array('class'=>'CoreRouter', 'component'=>'core', 'module'=>'routers');
+Config::$settings['classes']['router']                        = array('class'=>'TethCoreRouter', 'component'=>'core', 'module'=>'routers');
 Config::$settings['classes']['recursive_directory_iterator']  = array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
 Config::$settings['classes']['ini_directory_iterator']        = array('class'=>'ModifiedRecursiveDirectoryIterator', 'component'=>'core', 'module'=>'iterators');
 /**
