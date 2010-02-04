@@ -253,10 +253,7 @@ class Autoloader{
       $exception_class = Autoloader::class_for('missing_class', 'exceptions');
       $exception_path = Autoloader::path_to('missing_class', 'exceptions');
       if($exception_path) include_once $exception_path;
-      if($exception_class){
-        throw new $exception_class("CLASS NOT FOUND - $classname");
-        exit;
-      }
+      if($exception_class) throw new $exception_class("CLASS NOT FOUND - $classname");
     }
   }
   /**
