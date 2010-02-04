@@ -92,7 +92,7 @@ class TethCoreTemplate implements TemplateInterface{
     $template = new TethCoreTemplate($controller);
     
     if(!$content = $template->content()){
-      if($path == CoreRouter::$requested_path) $die = Config::$settings['config']['die_on']['missing_original_view'];
+      if($path == TethCoreRouter::$requested_path) $die = Config::$settings['config']['die_on']['missing_original_view'];
       else $die = Config::$settings['config']['die_on']['missing_other_views'];
       if($die) throw new Config::$settings['exceptions']['view_not_found']['class']("View not found", 404);
       else error_log('[TEMPLATE - RENDER] Not found - '.$path);

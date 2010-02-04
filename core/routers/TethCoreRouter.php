@@ -1,5 +1,5 @@
 <?
-class CoreRouter implements RouterInterface{
+class TethCoreRouter implements RouterInterface{
   //the var that handles the mapping
   public $position_map=array('controller'=>0, 'action'=>1, 'uid'=>2);
   //default values - format is appended and based on config var
