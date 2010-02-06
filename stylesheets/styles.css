@@ -95,15 +95,15 @@ ul.inline li, ol.inline li{float:left;}
 .bl{-moz-border-radius-bottomleft:0;-webkit-border-bottom-left-radius:0;}
 .br{-moz-border-radius-bottomright:0;-webkit-border-bottom-right-radius:0;}
 /**gradients**/
-.white_gradient{background:#eee -webkit-gradient(linear, left top, left bottom, from(#fff), to(#EEE)) !important;background:#eee -moz-linear-gradient(#fff, #eee) !important;}
-.green_gradient{background:#749900 -webkit-gradient(linear, left top, left bottom, from(#A0D300), to(#749900)) !important;background:#749900 -moz-linear-gradient(#A0D300, #749900) !important;}
-.blue_gradient{background:#7ac8ff -webkit-gradient(linear, left top, left bottom, from(#bbe3ff), to(#7ac8ff)) !important;background:#7ac8ff -moz-linear-gradient(#bbe3ff, #7ac8ff) !important;}
-.orange_gradient{background:#E16800 -webkit-gradient(linear, left top, left bottom, from(#fb7500), to(#E16800)) !important;background:#E16800 -moz-linear-gradient(#fb7500, #E16800) !important;}
-.red_gradient{background:#cc1a22 -webkit-gradient(linear, left top, left bottom, from(#eb1b24), to(#cc1a22)) !important;background:#cc1a22 -moz-linear-gradient(#eb1b24, #cc1a22) !important;}
-.yellow_gradient{background:#DDC36F -webkit-gradient(linear, left top, left bottom, from(#F9DC7D), to(#DDC36F)) !important;background:#DDC36F -moz-linear-gradient(#F9DC7D, #DDC36F) !important;}
-.black_gradient{background:#212121 -webkit-gradient(linear, left top, left bottom, from(#4d4d4d), to(#212121)) !important;background:#212121 -moz-linear-gradient(#4d4d4d, #212121) !important;}
-.grey_gradient{background:#DADADA -webkit-gradient(linear, left top, left bottom, from(#EFEFEF), to(#DADADA)) !important;background:#DADADA -moz-linear-gradient(#EFEFEF, #DADADA) !important;}
-.brown_gradient{background:#392927 -webkit-gradient(linear, left top, left bottom, from(#4C3F32), to(#392927)) !important;background:#392927 -moz-linear-gradient(#4C3F32, #392927) !important;}
+.white_gradient{background-color:#eee !important; background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#EEE)) !important;background: -moz-linear-gradient(#fff, #eee) !important;}
+.green_gradient{background-color:#749900 !important;background: -webkit-gradient(linear, left top, left bottom, from(#A0D300), to(#749900)) !important;background: -moz-linear-gradient(#A0D300, #749900) !important;}
+.blue_gradient{background-color:#7ac8ff !important;background: -webkit-gradient(linear, left top, left bottom, from(#bbe3ff), to(#7ac8ff)) !important;background: -moz-linear-gradient(#bbe3ff, #7ac8ff) !important;}
+.orange_gradient{background-color:#E16800 !important;background: -webkit-gradient(linear, left top, left bottom, from(#fb7500), to(#E16800)) !important;background: -moz-linear-gradient(#fb7500, #E16800) !important;}
+.red_gradient{background-color:#cc1a22 !important;background: -webkit-gradient(linear, left top, left bottom, from(#eb1b24), to(#cc1a22)) !important;background: -moz-linear-gradient(#eb1b24, #cc1a22) !important;}
+.yellow_gradient{background-color:#DDC36F !important;background: -webkit-gradient(linear, left top, left bottom, from(#F9DC7D), to(#DDC36F)) !important;background: -moz-linear-gradient(#F9DC7D, #DDC36F) !important;}
+.black_gradient{background-color:#212121 !important;background: -webkit-gradient(linear, left top, left bottom, from(#4d4d4d), to(#212121)) !important;background: -moz-linear-gradient(#4d4d4d, #212121) !important;}
+.grey_gradient{background-color:#DADADA !important;background: -webkit-gradient(linear, left top, left bottom, from(#EFEFEF), to(#DADADA)) !important;background: -moz-linear-gradient(#EFEFEF, #DADADA) !important;}
+.brown_gradient{background-color:#392927 !important;background: -webkit-gradient(linear, left top, left bottom, from(#4C3F32), to(#392927)) !important;background:-moz-linear-gradient(#4C3F32, #392927) !important;}
 /** **/
 /*header*/
 #header{
