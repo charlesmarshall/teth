@@ -66,9 +66,9 @@ ul.inline li, ol.inline li{float:left;}
 
 
 /** css 3 bits **/
-.curves{-moz-border-radius: 6px;-webkit-border-radius: 6px;}
+.curvy{-moz-border-radius:8px;-webkit-border-radius:8px;}
 .box_shadow{-webkit-box-shadow:1px 1px 6px #251E0D;-moz-box-shadow:1px 1px 6px #251E0D;}
-.text_shadow{text-shadow: 1px 1px 1px #000;}
+.text_shadow{text-shadow: 0px 0px 4px #000;}
 /** bubble shapes **/
 .circle{-moz-border-radius:100px;-webkit-border-radius:100px;}
 .tl{-moz-border-radius-topleft:0;-webkit-border-top-left-radius:0;}
@@ -100,10 +100,14 @@ ul.inline li, ol.inline li{float:left;}
     background:#749900;
     font-size:216%;
     color:#ECECEC;
-    padding:0px 16px 8px 11px;
+    padding:0 0.55em 0.25em 0.4em;
     line-height:1em;
   }
-  
+
+.full{
+  width:80%;
+  margin:0 auto;
+}
 
 /*content area*/
 #content{}
