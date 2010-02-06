@@ -84,6 +84,7 @@ ul.inline li, ol.inline li{float:left;}
 .yellow_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#F9DC7D), to(#DDC36F)) !important;background:-moz-linear-gradient(#F9DC7D, #DDC36F) !important;}
 .black_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#2D2D2D), to(#000)) !important;background:-moz-linear-gradient(#2D2D2D, #000) !important;}
 .grey_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#EFEFEF), to(#DADADA)) !important;background:-moz-linear-gradient(#EFEFEF, #DADADA) !important;}
+.brown_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#4C3F32), to(#392927)) !important;background:-moz-linear-gradient(#4C3F32, #392927) !important;}
 /** **/
 /*header*/
 #header{
@@ -96,7 +97,7 @@ ul.inline li, ol.inline li{float:left;}
     display:block;
     float:left;
     width:8px;
-    background:#212121;
+    background:#749900;
     font-size:216%;
     color:#ECECEC;
     padding:0px 16px 8px 11px;
