@@ -33,7 +33,7 @@ body{text-align:center;}
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 
 /** **/
-html{}
+html{background:#efefef;}
 *{
   text-align:left;
   font-family:helvetica;
@@ -67,7 +67,8 @@ ul.inline li, ol.inline li{float:left;}
 
 /** css 3 bits **/
 .curvy{-moz-border-radius:8px;-webkit-border-radius:8px;}
-.box_shadow{-webkit-box-shadow:1px 1px 6px #251E0D;-moz-box-shadow:1px 1px 6px #251E0D;}
+.box_shadow{-webkit-box-shadow:0px 0px 6px #302610;-moz-box-shadow:0px 0px 6px #302610;}
+.content_shadow{-webkit-box-shadow:2px 2px 12px #302610;-moz-box-shadow:2px 2px 12px #302610;}
 .text_shadow{text-shadow: 0px 0px 4px #000;}
 /** bubble shapes **/
 .circle{-moz-border-radius:100px;-webkit-border-radius:100px;}
@@ -88,29 +89,34 @@ ul.inline li, ol.inline li{float:left;}
 /** **/
 /*header*/
 #header{
-  background:black;
+  background:#392927;
+  padding:0.6em 5%;
 }
   #logo{
-    opacity:1;
     font-family:"Lucida Grande","Trebuchet MS";
-    margin:10px;
+    margin-left:1%;
     display:block;
     float:left;
     width:8px;
     background:#749900;
     font-size:216%;
     color:#ECECEC;
-    padding:0 0.55em 0.25em 0.4em;
+    padding:0 0.58em 0.27em 0.43em;
     line-height:1em;
   }
 
 .full{
-  width:80%;
+  width:90%;
   margin:0 auto;
 }
 
 /*content area*/
-#content{}
+#content{
+  width:88%;
+  padding:20px 1%;
+  background:white;
+  margin-bottom:20px;
+}
 
 #footer{
   padding:20px 0;
