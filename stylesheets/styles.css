@@ -80,7 +80,7 @@ ul.inline li, ol.inline li{float:left;}
 .green_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#A0D300), to(#749900)) !important;background:-moz-linear-gradient(#A0D300, #749900) !important;}
 .blue_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#5daae0), to(#549ACC)) !important;background:-moz-linear-gradient(#5daae0, #549ACC) !important;}
 .orange_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#fb7500), to(#E16800)) !important;background:-moz-linear-gradient(#fb7500, #E16800) !important;}
-.red_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#ff0018), to(#DB0014)) !important;background:-moz-linear-gradient(#ff0018, #DB0014) !important;}
+.red_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#EC2828), to(#e11919)) !important;background:-moz-linear-gradient(#EC2828, #e11919) !important;}
 .yellow_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#F9DC7D), to(#DDC36F)) !important;background:-moz-linear-gradient(#F9DC7D, #DDC36F) !important;}
 .black_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#2D2D2D), to(#000)) !important;background:-moz-linear-gradient(#2D2D2D, #000) !important;}
 .grey_gradient{background:-webkit-gradient(linear, left top, left bottom, from(#EFEFEF), to(#DADADA)) !important;background:-moz-linear-gradient(#EFEFEF, #DADADA) !important;}
