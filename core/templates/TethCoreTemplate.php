@@ -27,7 +27,11 @@ class TethCoreTemplate implements TethTemplateInterface{
     //split the controller name
     $parts = preg_split($pattern, str_replace("Controller", "", $config['controller']));
     //loop over and make an array of places to look in
-    foreach($parts as $part) $base.= $folders[] = $base.strtolower($part)."/";
+    foreach($parts as $part){
+      $folders[] = $base . strtolower($part)."/";
+      $base .= strtolower($part)."/";
+    }
+    
     //set the filename based on the action
     $file = $config['action'].$config['format'];
     
