@@ -49,7 +49,7 @@ Config::$settings['error_pages']['generic'] = array('file'=>'error', 'suffix'=>'
  * for example:
  *   SITE_DIR/plugins/ to find all extra plugins
  */
-Config::$settings['listings'] = array(FRAMEWORK_DIR, PLUGIN_DIR);
+Config::$settings['listings'] = array("FRAMEWORK_DIR", "PLUGIN_DIR");
 /**
  * name of ini files
  */
