@@ -196,7 +196,7 @@ class TethAutoloader{
           $dirname = dirname($path);
           include $path;
           $compname = substr($dirname, strrpos($dirname, "/")+1);
-          if(!TethAutoloader::$components[$compname]) TethAutoloader::add_component($compname, str_replace("/".$compname, "", $dirname));
+          if(!TethAutoloader::$components[$compname]) TethAutoloader::add_component($compname, str_replace($compname, "", $dirname));
         }
       }
     }
