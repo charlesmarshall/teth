@@ -208,7 +208,7 @@ class TethAutoloader{
     $scan = array_reverse(Config::$settings['listings']); //so newer added directories have priority
     foreach($scan as $dir){
       //iterator
-      $recurse = new RecursiveIteratorIterator(new $iterator_class($dir), true);
+      $recurse = new RecursiveIteratorIterator(new $iterator_class(constant($dir)), true);
       //loop over it
       foreach($recurse as $item){
         $path = $item->getPathName();
