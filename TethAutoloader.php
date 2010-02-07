@@ -49,7 +49,7 @@ Config::$settings['error_pages']['generic'] = array('file'=>'error', 'suffix'=>'
  * for example:
  *   SITE_DIR/plugins/ to find all extra plugins
  */
-Config::$settings['listings'] = array(FRAMEWORK_DIR, PLUGIN_DIR);
+Config::$settings['listings'] = array("FRAMEWORK_DIR", "PLUGIN_DIR");
 /**
  * name of ini files
  */
@@ -119,6 +119,26 @@ class TethAutoloader{
   public static $loaded = array();
   public static $controllers = array();
   public static $excluded = array('index.php','config.php','production.php', 'development.php', 'environment.php');
+  
+  
+  public function constants(){
+    $path = pathinfo(SITE_DIR);
+    define("SITE_NAME", $path['basename']);
+    define("FRAMEWORK_NAME", "teth");
+
+    if(!defined("FRAMEWORK_DIR")) define("FRAMEWORK_DIR", SITE_DIR.FRAMEWORK_NAME."/");
+    if(!defined("APP_DIR")) define('APP_DIR', SITE_DIR . "app/");
+    if(!defined("CONTROLLER_DIR")) define('CONTROLLER_DIR', APP_DIR.'controller/');
+    if(!defined("CONFIG_DIR")) define('CONFIG_DIR' , APP_DIR.'config/');
+    if(!defined("PUBLIC_DIR")) define('PUBLIC_DIR' , SITE_DIR.'public/');
+    if(!defined("PLUGIN_DIR")) define('PLUGIN_DIR' , SITE_DIR.'plugins/');
+
+    if(function_exists('date_default_timezone_set')){
+      if(!defined('PHP_TIMEZONE')) date_default_timezone_set('Europe/London');
+      else date_default_timezone_set(PHP_TIMEZONE);
+    }
+  }
+  
   /**
    * Work out the correct file path to use from the config file
    */
@@ -171,6 +191,7 @@ class TethAutoloader{
    * main function that reads a bunch of stuff in
    */
   public static function init(){
+    TethAutoloader::constants();
     TethAutoloader::$loaded['Autoloader'] = TethAutoloader::path_to('autoloader');
     TethAutoloader::register_inis();
     TethAutoloader::pre_init_hooks();
@@ -187,7 +208,7 @@ class TethAutoloader{
     $scan = array_reverse(Config::$settings['listings']); //so newer added directories have priority
     foreach($scan as $dir){
       //iterator
-      $recurse = new RecursiveIteratorIterator(new $iterator_class($dir), true);
+      $recurse = new RecursiveIteratorIterator(new $iterator_class(constant($dir)), true);
       //loop over it
       foreach($recurse as $item){
         $path = $item->getPathName();
