@@ -119,6 +119,26 @@ class TethAutoloader{
   public static $loaded = array();
   public static $controllers = array();
   public static $excluded = array('index.php','config.php','production.php', 'development.php', 'environment.php');
+  
+  
+  public function constants(){
+    $path = pathinfo(SITE_DIR);
+    define("SITE_NAME", $path['basename']);
+    define("FRAMEWORK_NAME", "teth");
+
+    if(!defined("FRAMEWORK_DIR")) define("FRAMEWORK_DIR", SITE_DIR.FRAMEWORK_NAME."/");
+    if(!defined("APP_DIR")) define('APP_DIR', SITE_DIR . "app/");
+    if(!defined("CONTROLLER_DIR")) define('CONTROLLER_DIR', APP_DIR.'controller/');
+    if(!defined("CONFIG_DIR")) define('CONFIG_DIR' , APP_DIR.'config/');
+    if(!defined("PUBLIC_DIR")) define('PUBLIC_DIR' , SITE_DIR.'public/');
+    if(!defined("PLUGIN_DIR")) define('PLUGIN_DIR' , SITE_DIR.'plugins/');
+
+    if(function_exists('date_default_timezone_set')){
+      if(!defined('PHP_TIMEZONE')) date_default_timezone_set('Europe/London');
+      else date_default_timezone_set(PHP_TIMEZONE);
+    }
+  }
+  
   /**
    * Work out the correct file path to use from the config file
    */
