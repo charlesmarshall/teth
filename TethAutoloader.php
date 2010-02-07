@@ -13,7 +13,7 @@
  *    - tmp
  */
 
-
+TethAutoloader::constants();
 /**
  * CONFIG CLASS
  */
@@ -191,7 +191,6 @@ class TethAutoloader{
    * main function that reads a bunch of stuff in
    */
   public static function init(){
-    TethAutoloader::constants();
     TethAutoloader::$loaded['Autoloader'] = TethAutoloader::path_to('autoloader');
     TethAutoloader::register_inis();
     TethAutoloader::pre_init_hooks();
