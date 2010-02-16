@@ -1,19 +1,20 @@
 teth_repositories:
-  skel:
+  teth_skel:
     branch: master
     name: "site skeleton"
     zip: http://github.com/sheldon/teth-skel/zipball/master
-  core:
+  teth_core:
     branch: v1
     name: v1
     zip: http://github.com/charlesmarshall/teth/zipball/v1
     test:
       branch: master
       zip: http://github.com/sheldon/teth-test/zipball/master
-  basic_model:
+  teth_model:
     branch: master
     name: "basic models"
     zip: http://github.com/sheldon/teth-model/zipball/master
     test:
       branch: master
-      zip: http://github.com/sheldon/teth-test-model/zipball/master  
+      zip: http://github.com/sheldon/teth-test-model/zipball/master
+  
