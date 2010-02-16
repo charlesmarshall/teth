@@ -13,6 +13,7 @@ def unzip(zip, dir)
 end
 
 def zip(filename, source)
+  puts " zipping #{filename} from #{source}\n"
   `cd ./to_be_zipped/ && zip -r ../zips/#{filename}.zip ./#{source}`
 end
 
