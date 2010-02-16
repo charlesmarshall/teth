@@ -1,37 +1,30 @@
 ---
 layout: default
 home: true
+custom: true
 title: Web Developer
-header_introduction: "<p>Occasionally I talk about stuff and build some things (you know, websites, applications, jQuery plugins and the like) and this is where I try to write about them.</p><p>I work as a web developer for One Black Bear in Birmingham, UK</p>"
 keywords:
-- charles marshall
-- charles
-- marshall
-- web developer
-- birmingham UK
-- birmingham
-- web
-- jquery
-- css
-- javascript
-- bash
-- WAA
-- google
-description: "Charles Marshall, web developer. Occasionally I talk about stuff and build some things (you know, websites, applications, jQuery plugins and the like) and this is where I try to write about them."
+description: ""
 ---
 
-{% for post in site.posts limit: 5 %}
-<div class="post row {{ post.category }} clearfix">
-  <h2 class='title'><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-  <div class='clearfix summary'>
-    <h5 class='date curvy'>{{ post.date | date_to_string }}</h5>
-    <h6 class='curvy'><a href='/{{ post.category | downcase }}.html' title='{{ post.category | downcase }}'>{{ post.category | downcase }}</a></h6>
+<div class='full clearfix' id="introduction">
+  <h1>Teth - MVC Framework</h1>
+  
+  <p class='first'>Aorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+      
+  <div class='feature feature0 curvy yellow_gradient'>
+    <ul>
+      <li>Lorem ipsum dolor sit amet</li>
+      <li>Consectetur adipisicing elit</li>
+      <li>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+      <li>Ut enim ad minim veniam</li>        
+    </ul>
   </div>
-  {% if post.introduction %}
-  {{ post.introduction }}
-  {% else %}
-  {{ post.content }}
-  {% endif %}
-  <p class='read_more'><a href="{{ post.url }}" title="{{ post.title }}" class='category curvy'>read more &raquo;</a></p>
+  
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+  
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+  
 </div>
-{% endfor %}

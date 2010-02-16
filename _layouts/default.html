@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" href="stylesheets/styles.css" type="text/css" media="all" charset="utf-8"/>   
+   <!--[if IE]><link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="all" charset="utf-8"/><![endif]-->
+  
+   <title>Teth Framework</title>
+</head>
+<body class=''>
+  
+  <div class='full brown_gradient clearfix' id="header">
+    <a href='/' title='home' id="logo" class='circle tl text_shadow green_gradient box_shadow'>t</a>    
+  </div>
+  
+  {% if page.custom %}
+  {{ content }}
+  {% else %}
+  
+  {% endif %}
+  
+  
+  <div class='full clearfix' id="footer">
+
+  </div>
+
+
+  <script src='http://www.google.com/jsapi'  type='text/javascript'></script>	
+  <script type='text/javascript'>google.load('jquery', '1.3');google.load('jqueryui', '1.7');</script>
+
+</body>
+</html>
