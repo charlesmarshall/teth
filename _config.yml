@@ -1,11 +1,13 @@
 teth_repositories:
   teth_skel:
+    skel: true
     branch: master
     name: "site skeleton"
     zip: http://github.com/sheldon/teth-skel/zipball/master
   teth_core:
+    core: true
     branch: v1
-    name: v1
+    name: teth
     zip: http://github.com/charlesmarshall/teth/zipball/v1
     test:
       branch: master
