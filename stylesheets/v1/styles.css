@@ -123,9 +123,13 @@ ul.inline li, ol.inline li{float:left;}
   }
   .remaining_letters{
     display:inline-block;
-    margin:0 0 0 -11px;
-    padding:10px 0 0 1px;
+    margin:0 0 0 -0.7em;
+    padding:0.7em 0 0;
   }
+    h2 span.remaining_letters{
+      
+    }
+  
 
 .full{
   width:90%;
@@ -189,9 +193,8 @@ ul.inline li, ol.inline li{float:left;}
     display:block;
   }
 
-#picker h2{
-  font-weight:bold;
-}
+
+
 /** related pages **/
 .related_posts{}
 
