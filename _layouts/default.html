@@ -4,12 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <meta name="author" content="Charles Marshall and Sheldon Els" />
+   <meta name="keywords" content="{{ page.keywords | join:',' }}" />
+   <meta name="description" content="{{ page.description }}" />
+   
    <link rel="stylesheet" href="stylesheets/styles.css" type="text/css" media="all" charset="utf-8"/>   
    <!--[if IE]><link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="all" charset="utf-8"/><![endif]-->
   
    <title>Teth Framework</title>
 </head>
-<body class='teth_{{ site.teth_repositories.teth_core.branch }}'>
+<body class='teth_{% for repo in site.teth_repositories %}{% if repo.core %}{{ forloop.index }}_{{ repo.branch }}{% endif %}{% endfor %}'>
   
   <div class='full brown_gradient clearfix' id="header">
     <a href='/' title='home' id="logo" class='circle tl text_shadow green_gradient box_shadow'>t</a>    
