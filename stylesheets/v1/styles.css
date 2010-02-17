@@ -140,13 +140,9 @@ ul.inline li, ol.inline li{float:left;}
   /*features*/
   .feature{
     padding:1em;
-    margin-left:34%;
-  }
-  .feature0{
-    padding:1em;
     width:29%;
-    float:left;
-    margin:0 3% 0.5em 0;
+    float:right;
+    margin:0 0 0.5em 3%;
   }
 /*content area*/
 #content, #introduction, #picker{

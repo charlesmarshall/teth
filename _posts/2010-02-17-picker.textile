@@ -11,7 +11,8 @@ category: packagepicker
   
   <h2 class='clearfix text_shadow'><span class='p circle tl text_shadow green_gradient box_shadow feature_letter'>P</span>ackage picker</h2>
     
-  <fieldset class='required'>
+  <fieldset class='required clearfix'>
+    <div class=''
     
   </fieldset>
   
