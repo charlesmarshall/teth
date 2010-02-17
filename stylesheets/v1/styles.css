@@ -142,7 +142,7 @@ ul.inline li, ol.inline li{float:left;}
     margin:0 3% 0.5em 0;
   }
 /*content area*/
-#content, #introduction{
+#content, #introduction, #picker{
   width:88%;
   padding:10px 1%;
   margin-bottom:10px;
