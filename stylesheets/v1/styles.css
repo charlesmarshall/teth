@@ -110,7 +110,7 @@ ul.inline li, ol.inline li{float:left;}
   background:#392927;
   padding:0.8em 5%;
 }
-  #logo{
+  .feature_letter{
     font-family:"Lucida Grande","Trebuchet MS", tahoma;
     margin-left:1%;
     display:block;

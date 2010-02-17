@@ -8,7 +8,7 @@ category: packagepicker
 
 
 <form action="" method="get" class='full clearfix package_picker' id="picker">    
-  <h2><span class='circle tl text_shadow orange_gradient box_shadow'>t</span>eth Package Picker</h2>
+  <h2><span class='circle tl text_shadow orange_gradient box_shadow feature_letter'>t</span>eth Package Picker</h2>
     
   <fieldset class='feature feature0 curvy yellow_gradient'>
     
