@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 require "yaml"
 require "open-uri"
 
