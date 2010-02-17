@@ -104,6 +104,7 @@ ul.inline li, ol.inline li{float:left;}
 .black_gradient{background-color:#212121 !important;background: -webkit-gradient(linear, left top, left bottom, from(#4d4d4d), to(#212121)) !important;background: -moz-linear-gradient(#4d4d4d, #212121) !important;}
 .grey_gradient{background-color:#DADADA !important;background: -webkit-gradient(linear, left top, left bottom, from(#EFEFEF), to(#DADADA)) !important;background: -moz-linear-gradient(#EFEFEF, #DADADA) !important;}
 .brown_gradient{background-color:#392927 !important;background: -webkit-gradient(linear, left top, left bottom, from(#4C3F32), to(#392927)) !important;background:-moz-linear-gradient(#4C3F32, #392927) !important;}
+.purple_gradient{background-color:#7D26CD !important;background: -webkit-gradient(linear, left top, left bottom, from(#902CEE), to(#7D26CD)) !important;background:-moz-linear-gradient(#902CEE, #7D26CD) !important;}
 /** **/
 /*header*/
 #header{
