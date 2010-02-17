@@ -9,7 +9,7 @@ category: packagepicker
 
 <form action="" method="get" class='full clearfix package_picker' id="picker">
   
-  <h2 class='clearfix'><span class='circle tl text_shadow orange_gradient box_shadow feature_letter'>p</span><span class='remaining_letters'>ackage Picker</span></h2>
+  <h2 class='clearfix'><span class='p circle tl text_shadow orange_gradient box_shadow feature_letter'>P</span><span class='remaining_letters'>ackage Picker</span></h2>
     
   <fieldset class='feature feature0 curvy yellow_gradient'>
     

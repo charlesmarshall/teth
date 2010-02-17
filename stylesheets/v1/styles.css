@@ -121,6 +121,10 @@ ul.inline li, ol.inline li{float:left;}
     padding:0 0.58em 0.27em 0.43em;
     line-height:1em;
   }
+    .p{
+      padding:0.1em 0.68em 0.17em 0.23em;
+    }
+  
   .remaining_letters{
     display:inline-block;
     margin:0 0 0 -0.7em;
