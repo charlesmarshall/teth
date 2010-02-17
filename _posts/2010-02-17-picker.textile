@@ -11,11 +11,11 @@ category: packagepicker
   
   <h2 class='clearfix text_shadow'><span class='p circle tl text_shadow orange_gradient box_shadow feature_letter'>P</span>ackage picker</h2>
     
-  <fieldset class='feature feature0 curvy yellow_gradient'>
+  <fieldset class='required'>
     
   </fieldset>
   
-  <fieldset class='feature feature1'>
+  <fieldset class='optional'>
     
   </fieldset>
   
