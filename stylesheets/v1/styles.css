@@ -123,8 +123,7 @@ ul.inline li, ol.inline li{float:left;}
   }
     h2 .feature_letter, h3 .feature_letter, h4 .feature_letter{
       font-size:138.5%;
-      margin-right:-0.25em;
-      margin-top:-0.19em;
+      margin:-0.19em -0.25em 0 0 ;
       padding:0.1em 0.48em 0.17em 0.35em;
       width:14px;
     }
