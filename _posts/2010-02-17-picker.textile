@@ -1,0 +1,13 @@
+---
+layout: default
+title: Pick your package!
+keywords:
+description: ""
+category: packagepicker
+---
+
+<div class='full clearfix package_picker'>
+  {% for repo in site.teth_repositories %}
+  {{ repo.name }}
+  {% endfor %}
+</div>
