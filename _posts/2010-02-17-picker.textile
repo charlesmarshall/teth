@@ -6,8 +6,17 @@ description: ""
 category: packagepicker
 ---
 
-<div class='full clearfix package_picker'>
-  {% for repo in site.teth_repositories %}
-  {{ repo }}
-  {% endfor %}
-</div>
+
+<form action="" method="get" class='full clearfix package_picker' id="picker">    
+  <h2><span class='circle tl text_shadow orange_gradient box_shadow'>t</span>eth Package Picker</h2>
+    
+  <fieldset class='feature feature0 curvy yellow_gradient'>
+    
+  </fieldset>
+  
+  <fieldset class='feature feature1'>
+    
+  </fieldset>
+  
+</form>
+  
