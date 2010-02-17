@@ -12,12 +12,18 @@ category: packagepicker
   <h2 class='clearfix text_shadow'><span class='p circle tl text_shadow green_gradient box_shadow feature_letter'>P</span>ackage picker</h2>
     
   <fieldset class='required clearfix'>
-    <div class=''
-    
+    <div class='teth_module teth_skel clearfix'>
+      
+    </div>
+    <div class='teth_module teth_core clearfix'>
+      
+    </div>
   </fieldset>
   
-  <fieldset class='optional'>
-    
+  <fieldset class='optional storage'>
+    <div class='teth_module teth_basic_model clearfix'>
+      
+    </div>
   </fieldset>
   
 </form>
