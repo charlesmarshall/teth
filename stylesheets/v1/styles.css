@@ -161,11 +161,15 @@ ul.inline li, ol.inline li{float:left;}
     width:28%;
   }
   #picker fieldset .packages{margin-left:29%;}
-
+  
   #picker fieldset .package, #picker .package_list{
     padding-bottom:15px;
+    margin-bottom:15px;
     border-bottom:1px dashed #ccc;
   }
+   .packages .package:last-child{
+     border-bottom-width:0;
+   }
 /*footer*/
 #footer{
   padding:20px 0;
