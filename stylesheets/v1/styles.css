@@ -44,7 +44,7 @@ h1{font-size:2.5em;}
 h2{font-size:2em;}
 h3,h4{font-size:1.3em;}
 h1,h2{margin-bottom:8px;}
-h3,h4{}
+h3,h4{margin-bottom:8px;}
 h1,h2,h5{}
 
 strong,b{font-weight:bold;}
@@ -130,6 +130,7 @@ ul.inline li, ol.inline li{float:left;}
     span.tick{
       font-size:108%;
       padding:0.3em 0.7em 0.4em 0.35em;
+      float:right;
     }
 
 .full{
@@ -167,10 +168,10 @@ ul.inline li, ol.inline li{float:left;}
     margin-bottom:15px;
     border-bottom:1px dashed #ccc;
   }
-   #picker .packages .package:last-child{
-     border-bottom-width:0;
-     margin-bottom:0;
-   }
+    #picker .packages .package:last-child{
+      border-bottom-width:0;
+      margin-bottom:0;
+    }
 /*footer*/
 #footer{
   padding:20px 0;

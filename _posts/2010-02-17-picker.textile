@@ -20,14 +20,16 @@ category: packagepicker
     <div class='packages clearfix'>
       <div class='package core_package clearfix'>
         <h4>Teth Core</h4>
-        <p class='package_information'></p>
         <span class='tick circle green_gradient box_shadow feature_letter'>√</span>
+        <p class='package_information'></p>
+        
       </div>
       
       <div class='package skel_package clearfix'>
         <h4>Site Skeleton</h4>
-        <p class='package_information'></p>
         <span class='tick circle green_gradient box_shadow feature_letter'>√</span>
+        <p class='package_information'></p>
+        
       </div>
     </div>
   
