@@ -167,8 +167,9 @@ ul.inline li, ol.inline li{float:left;}
     margin-bottom:15px;
     border-bottom:1px dashed #ccc;
   }
-   .packages .package:last-child{
+   #picker .packages .package:last-child{
      border-bottom-width:0;
+     margin-bottom:0;
    }
 /*footer*/
 #footer{
