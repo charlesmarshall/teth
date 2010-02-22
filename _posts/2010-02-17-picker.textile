@@ -35,6 +35,19 @@ category: packagepicker
   
   </fieldset>
   <fieldset class='optional_packages clearfix package_list'>
+    <div class='package_intro'>
+      <h3 class='clearfix'><span class='o circle tl blue_gradient box_shadow feature_letter'>O</span>ptional packages</h3>
+      <p class='package_category_information'></p>
+    </div>
+    <div class='packages clearfix'>
+      <div class='package models_package clearfix'>
+        <span class='cross circle green_gradient box_shadow feature_letter'>x</span>
+        <h4>Models</h4>        
+        <p class='package_information'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+        <p class='package_information'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
+    
   </fieldset> 
   
 </form>
