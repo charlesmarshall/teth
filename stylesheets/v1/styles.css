@@ -154,7 +154,14 @@ ul.inline li, ol.inline li{float:left;}
 #picker .required_packages{
   margin:20px 0 0 20px;
 }
-
+  #picker fieldset .package_intro{
+    float:left;
+    width:28%;
+  }
+  #picker fieldset .packages{
+    margin-left:29%;
+  }
+/*footer*/
 #footer{
   padding:20px 0;
   display:table;
