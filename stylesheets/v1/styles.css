@@ -128,7 +128,7 @@ ul.inline li, ol.inline li{float:left;}
       padding:0.1em 0.48em 0.17em 0.35em;
       width:14px;
     }
-    span.tick{
+    span.tick, span.cross{
       font-size:108%;
       padding:0.3em 0.7em 0.4em 0.35em;
       float:right;
