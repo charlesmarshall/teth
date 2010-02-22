@@ -13,18 +13,18 @@ category: packagepicker
     
   <fieldset class='required_packages clearfix'>
     <div class='package_intro'>
-      <h3 class='clearfix text_shadow'><span class='c circle tl text_shadow red_gradient box_shadow feature_letter'>C</span>ore packages</h3>
+      <h3 class='clearfix'><span class='c circle tl orange_gradient box_shadow feature_letter'>C</span>ore packages</h3>
       <p class='package_category_information'></p>
     </div>
         
     <div class='packages clearfix'>
       <div class='package core_package'>
-        <h4 class='text_shadow'>Teth Core</h4>
+        <h4>Teth Core</h4>
         <p class='package_information'></p>
       </div>
       
       <div class='package skel_package'>
-        <h4 class='text_shadow'>Site Skeleton</h4>
+        <h4>Site Skeleton</h4>
         <p class='package_information'></p>
       </div>
     </div>
