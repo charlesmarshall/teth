@@ -127,6 +127,9 @@ ul.inline li, ol.inline li{float:left;}
       padding:0.1em 0.48em 0.17em 0.35em;
       width:14px;
     }
+    span.tick{
+      
+    }
 
 .full{
   width:90%;

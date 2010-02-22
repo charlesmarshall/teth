@@ -21,11 +21,13 @@ category: packagepicker
       <div class='package core_package'>
         <h4>Teth Core</h4>
         <p class='package_information'></p>
+        <span class='tick circle green_gradient box_shadow feature_letter'>√</span>
       </div>
       
       <div class='package skel_package'>
         <h4>Site Skeleton</h4>
         <p class='package_information'></p>
+        <span class='tick circle green_gradient box_shadow feature_letter'>√</span>
       </div>
     </div>
   
