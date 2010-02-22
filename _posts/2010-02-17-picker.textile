@@ -11,20 +11,20 @@ category: packagepicker
   
   <h2 class='clearfix text_shadow'><span class='p circle tl text_shadow green_gradient box_shadow feature_letter'>P</span>ackage picker</h2>
     
-  <fieldset class='required_packages clearfix'>
+  <fieldset class='required_packages clearfix package_list'>
     <div class='package_intro'>
       <h3 class='clearfix'><span class='c circle tl orange_gradient box_shadow feature_letter'>C</span>ore packages</h3>
       <p class='package_category_information'></p>
     </div>
         
     <div class='packages clearfix'>
-      <div class='package core_package'>
+      <div class='package core_package clearfix'>
         <h4>Teth Core</h4>
         <p class='package_information'></p>
         <span class='tick circle green_gradient box_shadow feature_letter'>√</span>
       </div>
       
-      <div class='package skel_package'>
+      <div class='package skel_package clearfix'>
         <h4>Site Skeleton</h4>
         <p class='package_information'></p>
         <span class='tick circle green_gradient box_shadow feature_letter'>√</span>
@@ -32,7 +32,7 @@ category: packagepicker
     </div>
   
   </fieldset>
-  <fieldset class='optional_packages clearfix'>
+  <fieldset class='optional_packages clearfix package_list'>
   </fieldset> 
   
 </form>

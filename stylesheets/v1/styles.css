@@ -128,7 +128,8 @@ ul.inline li, ol.inline li{float:left;}
       width:14px;
     }
     span.tick{
-      
+      font-size:108%;
+      padding:0.3em 0.7em 0.4em 0.35em;
     }
 
 .full{
@@ -159,8 +160,11 @@ ul.inline li, ol.inline li{float:left;}
     float:left;
     width:28%;
   }
-  #picker fieldset .packages{
-    margin-left:29%;
+  #picker fieldset .packages{margin-left:29%;}
+
+  #picker fieldset .package, #picker .package_list{
+    padding-bottom:15px;
+    border-bottom:1px dashed #ccc;
   }
 /*footer*/
 #footer{
