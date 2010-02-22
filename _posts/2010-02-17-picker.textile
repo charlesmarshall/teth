@@ -8,31 +8,29 @@ category: packagepicker
 
 
 <form action="" method="get" class='full clearfix package_picker' id="picker">
-  
+
   <h2 class='clearfix text_shadow'><span class='p circle tl text_shadow green_gradient box_shadow feature_letter'>P</span>ackage picker</h2>
-    
+
   <fieldset class='required_packages clearfix package_list'>
     <div class='package_intro'>
       <h3 class='clearfix'><span class='c circle tl orange_gradient box_shadow feature_letter'>C</span>ore packages</h3>
       <p class='package_category_information'></p>
     </div>
-        
+
     <div class='packages clearfix'>
       <div class='package core_package clearfix'>
         <span class='tick circle green_gradient box_shadow feature_letter'>√</span>
-        <h4>Teth Core</h4>        
+        <h4>Teth Core</h4>
         <p class='package_information'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-        <p class='package_information'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-      
+
       <div class='package skel_package clearfix'>
-        <span class='tick circle green_gradient box_shadow feature_letter'>√</span>        
+        <span class='tick circle green_gradient box_shadow feature_letter'>√</span>
         <h4>Site Skeleton</h4>
         <p class='package_information'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-        <p class='package_information'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>                
       </div>
     </div>
-  
+
   </fieldset>
   <fieldset class='optional_packages clearfix package_list'>
     <div class='package_intro'>
@@ -42,13 +40,11 @@ category: packagepicker
     <div class='packages clearfix'>
       <div class='package models_package clearfix'>
         <span class='cross circle red_gradient box_shadow feature_letter'>x</span>
-        <h4>Models</h4>        
+        <h4>Models</h4>
         <p class='package_information'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-        <p class='package_information'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
     </div>
-    
-  </fieldset> 
-  
+
+  </fieldset>
+
 </form>
-  
